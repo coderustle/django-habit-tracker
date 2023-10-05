@@ -1,6 +1,6 @@
-# Habit Tracker Django App
+# Habit Stacker
 
-Habit Tracker is a simple, user-friendly web application to help users track and maintain their daily habits.
+Habit Stacker is a simple, user-friendly web application to help users track and maintain their daily habits.
 
 ## Features
 
@@ -14,6 +14,7 @@ Habit Tracker is a simple, user-friendly web application to help users track and
 
 - Django
 - Htmx
-- Litestream
 - Tailwindcss
 - Webpack
+- SQLite
+- Litestream
