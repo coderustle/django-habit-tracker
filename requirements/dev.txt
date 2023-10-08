@@ -4,3 +4,4 @@
 djlint
 black
 ruff
+pre-commit
