@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",  # whitenoise
     "django.contrib.staticfiles",
     # external apps
+    "widget_tweaks",
     "webpack_loader",
     # local apps
     "habitstacker.core.apps.CoreConfig",
@@ -126,6 +128,22 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+# WEBPACK
+# https://github.com/django-webpack/django-webpack-loader
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "CACHE": not DEBUG,
+        "STATS_FILE": os.path.join(BASE_DIR, "webpack/webpack-stats.json"),
+        "POLL_INTERVAL": 0.1,
+        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
+    }
+}
+
+# Whitenoise configuration
+# http://whitenoise.evans.io/en/stable/django.html
+# -----------------------------------------------------------------------------
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # WEBPACK
 # https://github.com/django-webpack/django-webpack-loader
