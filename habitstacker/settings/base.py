@@ -60,7 +60,7 @@ ROOT_URLCONF = "habitstacker.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "habitstacker/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
