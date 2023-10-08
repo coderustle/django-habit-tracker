@@ -122,6 +122,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "habitstacker/static"]
+
+# Media settings
+# https://docs.djangoproject.com/en/4.2/ref/settings/#media-root
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "habitstacker/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -144,14 +151,3 @@ WEBPACK_LOADER = {
 # http://whitenoise.evans.io/en/stable/django.html
 # -----------------------------------------------------------------------------
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-
-# WEBPACK
-# https://github.com/django-webpack/django-webpack-loader
-WEBPACK_LOADER = {
-    "DEFAULT": {
-        "CACHE": not DEBUG,
-        "STATS_FILE": os.path.join(BASE_DIR, "webpack/webpack-stats.json"),
-        "POLL_INTERVAL": 0.1,
-        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
-    }
-}
