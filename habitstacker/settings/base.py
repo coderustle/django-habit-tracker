@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-!)#htbdg-!6h@85z9rr&0fvcy7%+!l)dbv3r&v$uzf39jrz((f"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",  # whitenoise
     "django.contrib.staticfiles",
     # external apps
+    "widget_tweaks",
     "webpack_loader",
     # local apps
     "habitstacker.core.apps.CoreConfig",
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # whitenoise
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -58,7 +61,7 @@ ROOT_URLCONF = "habitstacker.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "habitstacker/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -80,7 +83,7 @@ WSGI_APPLICATION = "habitstacker.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "database/db.sqlite3",
     }
 }
 
@@ -120,6 +123,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "habitstacker/static"]
+
+# Media settings
+# https://docs.djangoproject.com/en/4.2/ref/settings/#media-root
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "habitstacker/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -137,3 +147,8 @@ WEBPACK_LOADER = {
         "IGNORE": [r".+\.hot-update.js", r".+\.map"],
     }
 }
+
+# Whitenoise configuration
+# http://whitenoise.evans.io/en/stable/django.html
+# -----------------------------------------------------------------------------
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
