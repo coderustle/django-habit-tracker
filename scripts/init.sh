@@ -21,7 +21,7 @@ if [ -f ./database/db.sqlite3 ]; then
 	echo "Database already exists, skipping restore"
 else
 	echo "No database found, restoring from replica if exists"
-	litestream restore -v -if-replica-exists -o /opt/habitstacker/database/db.sqlite3 "abs://budgetapp@databases/dev"
+	litestream restore -v -if-replica-exists -o /opt/habitstacker/database/db.sqlite3 "abs://coderustle@database/habitstacker/db.sqlite3"
 fi
 
 # =========================================
