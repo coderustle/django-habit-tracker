@@ -31,3 +31,11 @@ prod-run:
 	docker run --name habitstacker -it --rm \
 	--env-file ./.env \
 	-p 8000:8000 habitstacker:prod bash
+
+
+#--------------------------------------------------------
+# Litestream commands
+#--------------------------------------------------------
+restore:
+	litestream restore -v -if-database-exists -o ./database/db.sqlite3 \
+	$(REPLICA_URL)
