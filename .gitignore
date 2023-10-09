@@ -173,6 +173,6 @@ habitstacker/static/
 webpack/webpack-stats.json
 
 # Ignore litestream files
-*.db-shm
-*.db-wal
-*.db-litestream
+**/*.sqlite3-shm
+**/*.sqlite3-wal
+**/*.sqlite3-litestream
