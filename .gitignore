@@ -171,3 +171,8 @@ cython_debug/
 staticfiles/
 habitstacker/static/
 webpack/webpack-stats.json
+
+# Ignore litestream files
+*.db-shm
+*.db-wal
+*.db-litestream
