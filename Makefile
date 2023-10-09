@@ -6,7 +6,7 @@ endif
 #--------------------------------------------------------
 # Docker commands
 #--------------------------------------------------------
-build-dev:
+dev-build:
 	docker build . --target development \
 	--build-arg SECRET_KEY=$(SECRET_KEY) \
 	--build-arg DJANGO_SETTINGS_MODULE=$(DJANGO_SETTINGS_MODULE) \
@@ -14,6 +14,6 @@ build-dev:
 	--no-cache \
 	--tag habitstacker:dev
 
-run-dev:
+dev-run:
 	docker run --name habitstacker -it --rm \
 	-p 8000:8000 habitstacker:dev bash
