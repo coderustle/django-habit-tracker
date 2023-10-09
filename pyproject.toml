@@ -1,0 +1,18 @@
+[project]
+name = "habitstacker"
+description = "A django web app to track habits"
+version = "0.1.0"
+authors = [
+    { name = "Madalin Popa", email = "contact@madalinpopa.com" }
+]
+
+[tool.black]
+line-length = '80'
+extend-exclude = '^/migrations/*.py'
+
+[tool.djlint]
+profile="django"
+blank_line_after_tag="load,extends,endblock,endif,endfor"
+blank_line_before_tag="if,for"
+preserve_blank_lines=true
+max_line_length=120
