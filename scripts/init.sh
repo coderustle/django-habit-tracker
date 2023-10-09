@@ -21,10 +21,10 @@ if [ -f ./database/db.sqlite3 ]; then
 	echo "Database already exists, skipping restore"
 else
 	echo "No database found, restoring from replica if exists"
-	litestream restore -v -if-replica-exists -o /opt/habitstacker/database/db.sqlite3 "abs://budgetapp@databases/dev"
+	litestream restore -v -if-replica-exists -o /opt/habitstacker/database/db.sqlite3 "abs://coderustle@database/habitstacker/db.sqlite3"
 fi
 
 # =========================================
 # Start gunicorn process
 # =========================================
-exec litestream replicate -exec "gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --chdir /opt/budgetapp budgetapp.wsgi --access-logfile '-' --error-logfile '-'"
+exec litestream replicate -exec "gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --chdir /opt/habitstacker habitstacker.wsgi --access-logfile '-' --error-logfile '-'"
