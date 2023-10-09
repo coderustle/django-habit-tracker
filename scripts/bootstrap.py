@@ -27,7 +27,7 @@ def create_environment_variables():
     SECRET_KEY={secret}
     DJANGO_DEBUG=True
     REPLICA_URL=abs://coderustle@database/habitstacker/db.sqlite3
-    LITESTREAM_AZURE_ACCOUNT_KEY=op://Development/coderustle-storage-account-key/credential
+    LITESTREAM_AZURE_ACCOUNT_KEY=
     DATABASE_PATH=./database/db.sqlite3
     """
     env_path = PROJECT_ROOT / ".env"
