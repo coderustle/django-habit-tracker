@@ -117,3 +117,5 @@ habitstacker/static/**
 **/*.sqlite3-shm
 **/*.sqlite3-wal
 **/*.sqlite3-litestream
+**/*.sqlite3.tmp-shm
+**/*.sqlite3.tmp-wal
