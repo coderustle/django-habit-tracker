@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
+from django.template.response import TemplateResponse
 
-# Create your views here.
+
+def hello_world(request: HttpRequest) -> HttpResponse:
+    """Test view"""
+    template = "core/index.html"
+    return TemplateResponse(request, template)
