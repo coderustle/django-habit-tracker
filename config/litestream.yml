@@ -1,0 +1,9 @@
+dbs:
+  # Replicate production database in Azure Storage Account
+  - path: /opt/habitstacker/database/db.sqlite3
+    replicas:
+      - url: abs://habitstacker@databases/prod/db.sqlite3
+  # Replicate development database locally
+  - path: ./database/db.sqlite3
+    replicas:
+      - path: ./database/replica/db.sqlite3
