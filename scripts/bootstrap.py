@@ -26,6 +26,9 @@ def create_environment_variables():
     DJANGO_SETTINGS_MODULE=habitstacker.settings.dev
     SECRET_KEY={secret}
     DJANGO_DEBUG=True
+    REPLICA_URL=abs://habitstacker@databases/prod/db.sqlite3
+    LITESTREAM_AZURE_ACCOUNT_KEY=
+    DATABASE_PATH=./database/db.sqlite3
     """
     env_path = PROJECT_ROOT / ".env"
     with open(env_path, "w") as env:

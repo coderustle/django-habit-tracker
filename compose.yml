@@ -1,0 +1,25 @@
+services:
+  node:
+    image: node:18-alpine
+    container_name: node
+    environment:
+      - NODE_ENV=development
+    working_dir: /app
+    command: yarn run build:dev
+    volumes:
+      - ./:/app
+
+  litestream:
+    container_name: litestream
+    image: litestream/litestream
+    env_file:
+      - .env
+    environment:
+      - REPLICA_URL=${REPLICA_URL}
+      - LITESTREAM_AZURE_ACCOUNT_KEY=${LITESTREAM_AZURE_ACCOUNT_KEY}
+    working_dir: /app
+    command: replicate ./database/db.sqlite3 ${REPLICA_URL}
+    volumes:
+      - ./:/app
+    profiles:
+      - litestream
