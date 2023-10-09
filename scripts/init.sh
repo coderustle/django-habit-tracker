@@ -27,4 +27,4 @@ fi
 # =========================================
 # Start gunicorn process
 # =========================================
-exec litestream replicate -exec "gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --chdir /opt/budgetapp budgetapp.wsgi --access-logfile '-' --error-logfile '-'"
+exec litestream replicate -exec "gunicorn --bind=0.0.0.0 --timeout 600 --workers=4 --chdir /opt/habitstacker habitstacker.wsgi --access-logfile '-' --error-logfile '-'"
