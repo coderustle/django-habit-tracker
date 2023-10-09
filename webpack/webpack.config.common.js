@@ -79,11 +79,11 @@ module.exports = {
        * A directory path will be created as for the source file.
        */
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
       /**
-       * Rule 2: understand and parse the image files
+       * Rule 3: understand and parse the image files
        * Using webpac assets to load image files
        */
       {
