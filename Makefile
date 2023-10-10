@@ -16,7 +16,9 @@ dev-build:
 
 dev-run:
 	docker run --name habitstacker -it --rm \
-	-p 8000:8000 habitstacker:dev bash
+	--env-file ./.env \
+	-p 8000:8000 habitstacker:dev \
+	python manage.py runserver 0.0.0.0:8000
 
 
 prod-build:
