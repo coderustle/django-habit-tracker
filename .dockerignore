@@ -103,7 +103,6 @@ dmypy.json
 *.db
 *.yaml
 *.toml
-*.config.js
 *ignore
 Dockerfile
 
