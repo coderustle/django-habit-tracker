@@ -16,7 +16,13 @@ module.exports = {
    * index.js: is the main entrypoint.
    */
   entry: {
+    /**
+     * HTMX load
+     */
     htmx: "htmx.org",
+    /**
+     * index.js entrypoint
+     */
     index: {
       import: path.resolve(__dirname, "../habitstacker/assets/index.js"),
     },
@@ -42,7 +48,7 @@ module.exports = {
      */
     filename: "[name]-[fullhash].js",
     /**
-     * Everytime webpack runs will clear the '../budgetapp/static/js/ folder
+     * Everytime webpack runs will clear the '../habitstacker/static/js/ folder
      */
     clean: true,
   },
@@ -114,7 +120,11 @@ module.exports = {
   /**
    * OPTIMIZATION
    */
+  /**
+   * OPTIMIZATION
+   */
   optimization: {
     minimize: false,
+    runtimeChunk: "single",
   },
 };
