@@ -1,8 +1,8 @@
 dbs:
   # Replicate production database in Azure Storage Account
-  - path: /app/database/db.sqlite3
+  - path: /app/database/prod.sqlite3
     replicas:
       - type: abs
         account-name: coderustle
         bucket: database
-        path: habitstacker/db.sqlite3
+        path: habitstacker/prod.sqlite3
