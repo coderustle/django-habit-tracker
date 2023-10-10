@@ -119,3 +119,6 @@ habitstacker/static/**
 **/*.sqlite3-litestream
 **/*.sqlite3.tmp-shm
 **/*.sqlite3.tmp-wal
+
+# Ignore webpack stats
+webpack/webpack-stats.json
