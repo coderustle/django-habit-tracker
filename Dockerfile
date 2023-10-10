@@ -43,10 +43,14 @@ RUN --mount=type=cache,target=/var/cache/apt-base \
 
 # Create virtual environment
 RUN python -m venv /opt/venv
+
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Copy the project files
 COPY . .
+
+COPY --from=bundle /app/habitstacker/static /app/habitstacker/static
+COPY --from=bundle /app/webpack /app/webpack
 
 # Install python packages
 RUN pip install --upgrade pip && \
@@ -91,7 +95,7 @@ COPY . .
 # Expose Django port
 EXPOSE 8000
 
-# Run migrations and collectstatic
+# Run migrations
 RUN python manage.py migrate
 
 # ********************************************************
@@ -121,9 +125,9 @@ COPY ./config/litestream.yml /etc/litestream.yml
 COPY --from=base /opt/venv /opt/venv
 COPY --from=base /usr/local/bin/litestream /usr/local/bin/litestream
 
-# Copy staticfiles from base and bundle
+# Copy staticfiles from base
 COPY --from=base /app/staticfiles /app/staticfiles
-COPY --from=bundle /app/webpack /app/webpack
+COPY --from=base /app/webpack /app/webpack
 
 ENV PATH="/opt/venv/bin:$PATH"
 
