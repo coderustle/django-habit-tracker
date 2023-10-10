@@ -67,14 +67,14 @@ ENV DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
 ENV SECRET_KEY=${SECRET_KEY}
 
 # Set the working directory
-WORKDIR /opt/habitstacker
+WORKDIR /app
 
 # Copy build from base stage
 COPY --from=base /opt/venv /opt/venv
 # Copy staticfiles from static stage
-COPY --from=static /app/habitstacker/static /opt/habitstacker/habitstacker/static
+COPY --from=static /app/habitstacker/static /app/habitstacker/static
 # Copy webpack-stats.json
-COPY --from=static /app/webpack /opt/habitstacker/webpack
+COPY --from=static /app/webpack /app/webpack
 
 ENV PATH="/opt/venv/bin:$PATH"
 
@@ -108,7 +108,7 @@ RUN --mount=type=cache,target=/var/cache/apt-production \
 COPY ./config/sshd_config /etc/ssh/
 
 # Set the working directory
-WORKDIR /opt/habitstacker
+WORKDIR /app
 
 # Copy build from base
 COPY --from=base /opt/venv /opt/venv
