@@ -12,6 +12,18 @@ on:
 
 jobs:
   # ==========================================================
+  # Build Docker image
+  # ==========================================================
+  build:
+    uses: ./.github/workflows/reusable-build.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+    with:
+        environment: "Development"
+        push: false
+  # ==========================================================
   # Release Docker image
   # ==========================================================
   release:
@@ -23,6 +35,3 @@ jobs:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
     with:
         environment: "Development"
-  # ==========================================================
-  # Run unit tests
-  # ==========================================================
