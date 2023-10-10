@@ -18,6 +18,10 @@ on:
         default: 'development'
         required: false
         type: string
+      push:
+        default: true
+        required: false
+        type: boolean
       tag:
         default: 'dev'
         required: false
@@ -56,7 +60,7 @@ jobs:
         with:
           context: .
           target: ${{ inputs.target }}
-          push: true
+          push: ${{ inputs.push }}
           build-args: |
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             DJANGO_SETTINGS_MODULE=${{ vars.DJANGO_SETTINGS_MODULE }}
