@@ -17,11 +17,11 @@ service ssh start
 # Litestream restore database
 # =========================================
 # Restore the database if it does not already exist.
-if [ -f ./database/db.sqlite3 ]; then
+if [ -f ./database/prod.sqlite3 ]; then
 	echo "Database already exists, skipping restore"
 else
 	echo "No database found, restoring from replica if exists"
-	litestream restore -v -if-replica-exists -o /app/database/db.sqlite3 "abs://coderustle@database/habitstacker/db.sqlite3"
+	litestream restore -v -if-replica-exists -o /app/database/prod.sqlite3 "abs://coderustle@database/habitstacker/prod.sqlite3"
 fi
 
 # =========================================
