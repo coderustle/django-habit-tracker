@@ -18,3 +18,13 @@ Habit Stacker is a simple, user-friendly web application to help users track and
 - Webpack
 - SQLite
 - Litestream
+
+## Run it locally using Docker
+
+1. Clone the repository `git clone https://github.com/coderustle/habitstacker.git`
+2. Change directory `cd habitstacker`
+3. Create a Python environment `python -m venv .venv`
+4. Activate virtual environment `source .venv/bin/activate`
+5. Generate `.env` file by running `./script/bootstrap.py`
+6. Build development container `make dev-build`
+7. Run development container `make dev-run`
