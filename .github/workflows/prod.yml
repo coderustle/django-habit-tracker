@@ -1,28 +1,25 @@
-name: Development
-run-name: Development workflow
+name: Production
+run-name: Production workflow
 
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - closed
+  push:
+    tags:
+      - v*
     branches:
       - main
 
 jobs:
   # ==========================================================
-  # Release Docker image
+  # Build Docker image
   # ==========================================================
-  release:
-    if: github.event.pull_request.merged == true
+  build:
     uses: ./.github/workflows/reusable-build.yml
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
     with:
-        environment: "Development"
-  # ==========================================================
-  # Run unit tests
-  # ==========================================================
+        tag: ${{ github.ref_name }}
+        environment: "Production"
+        requirements: "prod"
+        target: "production"
