@@ -52,7 +52,7 @@ COPY . .
 RUN corepack enable
 
 # Install packages
-RUN yarn install && yarn run build:prod
+RUN yarn install --frozen-lockfile && yarn run build:prod
 
 # ********************************************************
 # * Docker Django - Development                          *
@@ -104,8 +104,9 @@ RUN --mount=type=cache,target=/var/cache/apt-production \
     && apt-get install -y --no-install-recommends openssh-server \
     && echo "$SSH_PASSWD" | chpasswd
 
-# Copy the sshd config file
+# Copy config files
 COPY ./config/sshd_config /etc/ssh/
+COPY ./config/litestream.yml /etc/litestream.yml
 
 # Set the working directory
 WORKDIR /app
@@ -118,7 +119,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 # Copy the project files
 COPY . .
-COPY ./config/litestream.yml /etc/litestream.yml
+
 
 # Expose django port
 EXPOSE 8000 2222
