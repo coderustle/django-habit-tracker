@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("users/", include("habitstacker.users.urls", namespace="users")),
     path("", include("habitstacker.core.urls", namespace="core")),
 ]

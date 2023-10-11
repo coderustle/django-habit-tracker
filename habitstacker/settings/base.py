@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     # external apps
     "widget_tweaks",
     "webpack_loader",
+    "guardian",
+    "django_htmx",
     # local apps
     "habitstacker.core.apps.CoreConfig",
+    "habitstacker.users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",  # htmx
 ]
 
 ROOT_URLCONF = "habitstacker.urls"
@@ -76,6 +80,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "habitstacker.wsgi.application"
 
+# SET CUSTOM USER MODEL
+# -----------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting
+# -AUTH_USER_MODEL
+AUTH_USER_MODEL = "users.User"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",  # default one
+    "guardian.backends.ObjectPermissionBackend",  # guardian authentication
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
