@@ -8,4 +8,5 @@ def index(request: HttpRequest) -> HttpResponse:
     template = "core/index.html"
     if request.htmx:
         template = "core/partials/index.html"
+
     return TemplateResponse(request, template)

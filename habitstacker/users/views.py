@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
 
-from .forms import UserCreationForm
+from .forms import RegisterUserForm
 
 
 @require_http_methods(["GET", "POST"])
@@ -23,11 +23,11 @@ def register(request: HttpRequest) -> HttpResponse:
         template = "registration/partials/register.html"
 
     if request.method == "GET":
-        form = UserCreationForm()
+        form = RegisterUserForm()
         return TemplateResponse(request, template, {"form": form})
 
     if request.method == "POST":
-        form = UserCreationForm()
+        form = RegisterUserForm()
         if form.is_valid():
             user = form.save()
             # because we have two authentication backends, Django dosen't knwo
@@ -38,5 +38,7 @@ def register(request: HttpRequest) -> HttpResponse:
             return redirect("core:home")
         else:
             messages.error(request, str(form.errors))
-        return TemplateResponse(request, template, {"form": form})
+            print(form.errors)
+            return TemplateResponse(request, template, {"form": form})
+
     return HttpResponse(status_code=400)
