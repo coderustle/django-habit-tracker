@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "webpack_loader",
     # local apps
     "habitstacker.core.apps.CoreConfig",
+    "habitstacker.users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
