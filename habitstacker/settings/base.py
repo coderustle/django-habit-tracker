@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # external apps
     "widget_tweaks",
     "webpack_loader",
+    "guardian",
     # local apps
     "habitstacker.core.apps.CoreConfig",
     "habitstacker.users.apps.UsersConfig",
@@ -82,6 +83,11 @@ WSGI_APPLICATION = "habitstacker.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting
 # -AUTH_USER_MODEL
 AUTH_USER_MODEL = "users.User"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",  # default one
+    "guardian.backends.ObjectPermissionBackend",  # guardian authentication
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
