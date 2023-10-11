@@ -1,5 +1,7 @@
 # Habit Stacker
 
+[![Production](https://github.com/coderustle/habitstacker/actions/workflows/prod.yml/badge.svg)](https://github.com/coderustle/habitstacker/actions/workflows/prod.yml) [![Development](https://github.com/coderustle/habitstacker/actions/workflows/dev.yml/badge.svg)](https://github.com/coderustle/habitstacker/actions/workflows/dev.yml)
+
 Habit Stacker is a simple, user-friendly web application to help users track and maintain their daily habits.
 
 ## Features
