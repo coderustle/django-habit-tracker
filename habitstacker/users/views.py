@@ -18,11 +18,9 @@ def register(request: HttpRequest) -> HttpResponse:
     If the request method is POST, it validates the form data and creates a new
     user if valid.
     """
-    template = None
+    template = "registration/register.html"
     if request.htmx:
         template = "registration/partials/register.html"
-    else:
-        template = "registration/register.html"
 
     if request.method == "GET":
         form = UserCreationForm()
