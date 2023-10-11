@@ -77,6 +77,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "habitstacker.wsgi.application"
 
+# SET CUSTOM USER MODEL
+# -----------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting
+# -AUTH_USER_MODEL
+AUTH_USER_MODEL = "users.User"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
