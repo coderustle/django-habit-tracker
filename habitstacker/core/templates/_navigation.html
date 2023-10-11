@@ -1,0 +1,26 @@
+
+<div class="p-4 bg-dark text-white ">
+  <div class="container flex items-center justify-between">
+
+    <button hx-get="{% url "core:index" %}"
+            hx-push-url="true"
+            hx-swap="innerHTML"
+            hx-target="#main-content"
+            class="text-xl font-semibold flex flex-col p-2 rounded border border-primary w-max hover:border-secondary transition-colors duration-500">
+      <span>Habit</span>
+      <span>Stacker</span>
+    </button>
+
+    <nav class="font-semibold text-primary">
+      <ul class="flex gap-4 tracking-wider">
+        <li class="hover:text-secondary">
+          <a href="#">Login</a>
+        </li>
+        <li class="hover:text-secondary">
+          <a href="#">Register</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
