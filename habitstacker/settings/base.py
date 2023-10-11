@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "webpack_loader",
     "guardian",
+    "django_htmx",
     # local apps
     "habitstacker.core.apps.CoreConfig",
     "habitstacker.users.apps.UsersConfig",
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",  # htmx
 ]
 
 ROOT_URLCONF = "habitstacker.urls"
