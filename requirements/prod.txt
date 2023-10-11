@@ -3,6 +3,7 @@ Django==4.2.6
 # Django external packages
 django-webpack-loader==2.0.1
 django-widget-tweaks==1.5.0
+django-guardian==2.4.0
 
 # External packages
 python-dotenv==1.0.0
