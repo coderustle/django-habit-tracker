@@ -27,6 +27,13 @@
                   hx-push-url="true"
                   class="cursor-pointer tracking-wider">Register</button>
         </li>
+        <li class="hover:text-secondary transition-colors duration-500">
+          <button hx-get="{% url 'users:logout' %}"
+                  hx-swap="innerHTML"
+                  hx-target="#main-content"
+                  hx-push-url="true"
+                  class="cursor-pointer tracking-wider">Logout</button>
+        </li>
       </ul>
     </nav>
 
