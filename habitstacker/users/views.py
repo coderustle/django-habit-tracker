@@ -54,3 +54,28 @@ def user_login(request: HttpRequest) -> HttpResponse:
     If the request method is POST, it validates the form data and creates a new
     user if valid.
     """
+    template = "registration/login.html"
+    if request.htmx:
+        template = "registration/partials/login.html"
+
+    if request.method == "GET":
+        form = AuthenticationForm()
+        return TemplateResponse(request, template, {"form": form})
+
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request=request, user=user)
+                return HtmxResponseRedirect(
+                    redirect_to=reverse_lazy("core:home")
+                )
+            else:
+                messages.error(request, "Invalid username or password")
+                return HtmxResponseRedirect(
+                    redirect_to=reverse_lazy("user:login")
+                )
+    return HttpResponse(status_code=400)
