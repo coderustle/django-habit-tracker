@@ -41,3 +41,14 @@ def register(request: HttpRequest) -> HttpResponse:
             return TemplateResponse(request, template, {"form": form})
 
     return HttpResponse(status_code=400)
+
+
+@require_http_methods(["GET", "POST"])
+def user_login(request: HttpRequest) -> HttpResponse:
+    """
+    View function that handles user registration.
+
+    If the request method is GET, it renders the registration form.
+    If the request method is POST, it validates the form data and creates a new
+    user if valid.
+    """
