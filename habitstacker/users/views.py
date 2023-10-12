@@ -1,11 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
-from django.shortcuts import redirect
 from django.template.response import TemplateResponse
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_http_methods
 
+from ..core.utils import HtmxResponseRedirect
 from .forms import RegisterUserForm
 
 
@@ -35,10 +37,10 @@ def user_register(request: HttpRequest) -> HttpResponse:
             backend = "django.contrib.auth.backends.ModelBackend"
             login(request=request, user=user, backend=backend)
             messages.success(request, "Registration successful")
-            return redirect("core:home")
+            return HtmxResponseRedirect(redirect_to=reverse_lazy("core:home"))
         else:
             messages.error(request, str(form.errors))
-            return TemplateResponse(request, template, {"form": form})
+            return HtmxResponseRedirect(redirect_to=reverse_lazy("user:login"))
 
     return HttpResponse(status_code=400)
 
