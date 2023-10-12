@@ -31,6 +31,7 @@ class HabitLog(models.Model):
 
     class Meta:
         unique_together = ["date", "habit"]
+        indexes = [models.Index(fields=["-date"])]
 
     def __str__(self) -> str:
         return f"{self.habit.title} on {self.date}"
