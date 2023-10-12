@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
@@ -42,7 +42,7 @@ def user_register(request: HttpRequest) -> HttpResponse:
             messages.error(request, str(form.errors))
             return HtmxResponseRedirect(redirect_to=reverse_lazy("user:login"))
 
-    return HttpResponse(status_code=400)
+    return TemplateResponse(request, template, {"form": form})
 
 
 @require_http_methods(["GET", "POST"])
@@ -78,4 +78,13 @@ def user_login(request: HttpRequest) -> HttpResponse:
                 return HtmxResponseRedirect(
                     redirect_to=reverse_lazy("user:login")
                 )
-    return HttpResponse(status_code=400)
+    messages.error(request, str(form.errors))
+    return TemplateResponse(request, template, {"form": form})
+
+
+def user_logout(request: HttpRequest) -> HttpResponse:
+    """
+    Logs out the current user and redirects to the login page.
+    """
+    logout(request=request)
+    return HtmxResponseRedirect(redirect_to=reverse_lazy("users:login"))
