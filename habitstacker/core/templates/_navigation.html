@@ -1,5 +1,5 @@
 
-<div class="text-white p-4 shadow-lg">
+<div class="text-white shadow-lg">
   <div class="container p-4 flex flex-col sm:flex-row gap-6 items-center sm:justify-between">
 
     <button hx-get="{% url "core:index" %}"
@@ -12,20 +12,20 @@
     </button>
 
     <nav class="font-semibold text-primary">
-      <ul class="flex gap-4 tracking-wider">
+      <ul class="flex gap-4">
         <li class="hover:text-secondary transition-colors duration-500">
           <button hx-get="{% url 'users:register' %}"
                   hx-swap="innerHTML"
                   hx-target="#main-content"
                   hx-push-url="true"
-                  class="cursor-pointer">Login</button>
+                  class="cursor-pointer tracking-wider text-xl">Login</button>
         </li>
         <li class="hover:text-secondary transition-colors duration-500">
           <button hx-get="{% url 'users:register' %}"
                   hx-swap="innerHTML"
                   hx-target="#main-content"
                   hx-push-url="true"
-                  class="cursor-pointer">Register</button>
+                  class="cursor-pointer tracking-wider text-xl">Register</button>
         </li>
       </ul>
     </nav>

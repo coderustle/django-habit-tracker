@@ -27,7 +27,7 @@ def register(request: HttpRequest) -> HttpResponse:
         return TemplateResponse(request, template, {"form": form})
 
     if request.method == "POST":
-        form = RegisterUserForm()
+        form = RegisterUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             # because we have two authentication backends, Django dosen't knwo
@@ -38,7 +38,6 @@ def register(request: HttpRequest) -> HttpResponse:
             return redirect("core:home")
         else:
             messages.error(request, str(form.errors))
-            print(form.errors)
             return TemplateResponse(request, template, {"form": form})
 
     return HttpResponse(status_code=400)
