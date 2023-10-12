@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.template.response import TemplateResponse
@@ -12,6 +13,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return TemplateResponse(request, template)
 
 
+@login_required
 def home(request: HttpRequest) -> HttpResponse:
     """
     Render the home page after user successfully login.
