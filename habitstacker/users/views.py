@@ -10,7 +10,7 @@ from .forms import RegisterUserForm
 
 
 @require_http_methods(["GET", "POST"])
-def register(request: HttpRequest) -> HttpResponse:
+def user_register(request: HttpRequest) -> HttpResponse:
     """
     View function that handles user registration.
 
