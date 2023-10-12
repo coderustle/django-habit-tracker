@@ -12,20 +12,20 @@
     </button>
 
     <nav class="font-semibold text-primary">
-      <ul class="flex gap-4">
+      <ul class="flex gap-4 text-xl md:text-lg">
         <li class="hover:text-secondary transition-colors duration-500">
-          <button hx-get="{% url 'users:register' %}"
+          <button hx-get="{% url 'users:login' %}"
                   hx-swap="innerHTML"
                   hx-target="#main-content"
                   hx-push-url="true"
-                  class="cursor-pointer tracking-wider text-xl">Login</button>
+                  class="cursor-pointer tracking-wider">Login</button>
         </li>
         <li class="hover:text-secondary transition-colors duration-500">
           <button hx-get="{% url 'users:register' %}"
                   hx-swap="innerHTML"
                   hx-target="#main-content"
                   hx-push-url="true"
-                  class="cursor-pointer tracking-wider text-xl">Register</button>
+                  class="cursor-pointer tracking-wider">Register</button>
         </li>
       </ul>
     </nav>

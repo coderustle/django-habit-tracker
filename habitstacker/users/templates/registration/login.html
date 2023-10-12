@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+  Habit Stacker | Login
+{% endblock title %}
+
+{% block content %}
+
+  <div id="main-content" class="h-full mt-6">
+
+    <div class="container p-4 h-3/4 max-w-2xl">
+
+      <div class="max-w-sm mx-auto px-4">
+
+        <form method="post" action="{% url 'users:login' %}">
+          {% csrf_token %}
+          <div class="w-full space-y-2">
+            {% render_field form.username placeholder=form.username.label class="border-b border-primary py-4 bg-transparent rounded-sm focus:outline-none focus:border-secondary w-full" %}
+            {% render_field form.password placeholder=form.password.label class="border-b border-primary py-4 bg-transparent rounded-sm focus:outline-none focus:border-secondary w-full" %}
+          </div>
+          <div class="my-10">
+            <input type="hidden" name="next" value="{{ next }}" />
+            <input type="submit"
+                   value="Login"
+                   class="block w-full rounded-md border border-primary py-2 text-lg hover:cursor-pointer hover:shadow-lg focus:border-secondary focus:outline-none dark:bg-dark hover:border-secondary transition-colors duration-500" />
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock content %}
