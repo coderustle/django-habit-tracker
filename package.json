@@ -24,7 +24,6 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
-    "boxicons": "^2.1.4",
     "htmx.org": "^1.9.6"
   }
 }
