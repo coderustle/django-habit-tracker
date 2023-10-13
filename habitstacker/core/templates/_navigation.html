@@ -1,53 +1,67 @@
 
-<div class="text-white shadow-lg">
-  <div class="container p-4 flex flex-col sm:flex-row gap-6 items-center sm:justify-between">
+<div x-data="{showMenu: false}" class="bg-gray-200">
+  <div class="container p-4 flex justify-center items-center">
 
     <button hx-get="{% url "core:index" %}"
             hx-push-url="true"
             hx-swap="innerHTML"
             hx-target="#main-content"
-            class="text-xl font-semibold flex flex-col items-center sm:items-start p-2 rounded border border-primary w-max hover:border-secondary transition-colors duration-500">
-      <span>Habit</span>
-      <span>Stacker</span>
+            class="text-3xl flex gap-2 items-center sm:items-start p-2 w-max hover:scale-105 transition-scale duration-500">
+      <span class="text-secondary font-bold">Habit</span>
+      <span class="font-bold">Stacker</span>
     </button>
 
-    <nav class="font-semibold text-primary">
-      <ul class="flex gap-4 text-xl md:text-lg">
+    <div class="absolute border z-10 top-0 left-0 bg-gray-200 h-full w-60">
+      <button @click.prevent="console.log('hei')"
+              class="p-4 flex justify-center items-center">
 
-        {% if user.is_authenticated %}
-          <li class="hover:text-secondary transition-colors duration-500">
-            <button hx-get="{% url 'users:profile' %}"
-                    hx-swap="innerHTML"
-                    hx-target="#main-content"
-                    hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Profile</button>
-          </li>
-          <li class="hover:text-secondary transition-colors duration-500">
-            <button hx-get="{% url 'users:logout' %}"
-                    hx-swap="innerHTML"
-                    hx-target="#main-content"
-                    hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Logout</button>
-          </li>
-        {% else %}
-          <li class="hover:text-secondary transition-colors duration-500">
-            <button hx-get="{% url 'users:login' %}"
-                    hx-swap="innerHTML"
-                    hx-target="#main-content"
-                    hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Login</button>
-          </li>
-          <li class="hover:text-secondary transition-colors duration-500">
-            <button hx-get="{% url 'users:register' %}"
-                    hx-swap="innerHTML"
-                    hx-target="#main-content"
-                    hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Register</button>
-          </li>
-        {% endif %}
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"
+             width="32"
+             height="32">
+          <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+        </svg>
 
-      </ul>
-    </nav>
+      </button>
+      <nav x-show="showMenu" class="p-4 border-2 border-black">
+        <ul class="flex flex-col gap-4 text-xl md:text-lg">
+
+          {% if user.is_authenticated %}
+            <li class="hover:text-secondary transition-colors duration-500">
+              <button hx-get="{% url 'users:profile' %}"
+                      hx-swap="innerHTML"
+                      hx-target="#main-content"
+                      hx-push-url="true"
+                      class="cursor-pointer tracking-wider">Profile</button>
+            </li>
+            <li class="hover:text-secondary transition-colors duration-500">
+              <button hx-get="{% url 'users:logout' %}"
+                      hx-swap="innerHTML"
+                      hx-target="#main-content"
+                      hx-push-url="true"
+                      class="cursor-pointer tracking-wider">Logout</button>
+            </li>
+          {% else %}
+            <li class="hover:text-secondary transition-colors duration-500">
+              <button hx-get="{% url 'users:login' %}"
+                      hx-swap="innerHTML"
+                      hx-target="#main-content"
+                      hx-push-url="true"
+                      class="cursor-pointer tracking-wider">Login</button>
+            </li>
+            <li class="hover:text-secondary transition-colors duration-500">
+              <button hx-get="{% url 'users:register' %}"
+                      hx-swap="innerHTML"
+                      hx-target="#main-content"
+                      hx-push-url="true"
+                      class="cursor-pointer tracking-wider">Register</button>
+            </li>
+          {% endif %}
+
+        </ul>
+      </nav>
+
+    </div>
 
   </div>
 </div>

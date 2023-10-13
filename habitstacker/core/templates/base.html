@@ -45,7 +45,7 @@
 
   </head>
   <body class="h-full font-worker bg-gradient-to-r from-gray-100 to-gray-200">
-    <main id="main" class="h-full">
+    <main id="main" class="h-full overflow-hidden">
       <!-- Header -->
       {% block header %}
 
@@ -71,6 +71,7 @@
     </main>
     <!-- Javascript-->
     {% block footer_script %}
+      {% render_bundle 'alpine' 'js' %}
       {% render_bundle 'htmx' 'js' %}
       {% render_bundle 'index' 'js' %}
       <script>
