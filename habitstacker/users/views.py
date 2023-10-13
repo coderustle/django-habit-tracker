@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
@@ -88,3 +89,15 @@ def user_logout(request: HttpRequest) -> HttpResponse:
     """
     logout(request=request)
     return HtmxResponseRedirect(redirect_to=reverse_lazy("users:login"))
+
+
+@login_required
+def user_profile(request: HttpRequest) -> HttpResponse:
+    """
+    View function that displays the user's profile page.
+    """
+    template = "users/profile.html"
+    if request.htmx:
+        template = "users/partials/profile.html"
+
+    return TemplateResponse(request, template)
