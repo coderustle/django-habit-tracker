@@ -24,6 +24,7 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
+    "alpinejs": "^3.13.1",
     "htmx.org": "^1.9.6"
   }
 }

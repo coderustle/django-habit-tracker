@@ -17,6 +17,10 @@ module.exports = {
    */
   entry: {
     /**
+     * Alpine JS
+     */
+    alpine: "alpinejs",
+    /**
      * HTMX load
      */
     htmx: "htmx.org",
