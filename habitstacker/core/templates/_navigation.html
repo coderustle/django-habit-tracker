@@ -1,5 +1,5 @@
 
-<div x-data="{showMenu: false}" class="bg-gray-200 flex items-center">
+<div class="bg-gray-200 flex items-center">
   <div class="container p-4 flex flex-col">
 
     <div class="flex items-center justify-between">
@@ -13,7 +13,7 @@
         </svg>
       </button>
 
-      <button hx-get="{% url "core:index" %}"
+      <button hx-get="{% url "core:home" %}"
               hx-push-url="true"
               hx-swap="innerHTML"
               hx-target="#main-content"
