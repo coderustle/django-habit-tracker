@@ -16,6 +16,13 @@
 
         {% if user.is_authenticated %}
           <li class="hover:text-secondary transition-colors duration-500">
+            <button hx-get="{% url 'users:profile' %}"
+                    hx-swap="innerHTML"
+                    hx-target="#main-content"
+                    hx-push-url="true"
+                    class="cursor-pointer tracking-wider">Profile</button>
+          </li>
+          <li class="hover:text-secondary transition-colors duration-500">
             <button hx-get="{% url 'users:logout' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
