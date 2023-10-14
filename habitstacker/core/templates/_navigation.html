@@ -26,6 +26,7 @@
     <nav x-cloak
          x-transition
          x-show="showMenu"
+         @click.prevent="showMenu = !showMenu"
          class="relative w-full bg-gray-200 p-4">
       <ul class="flex flex-col items-center justify-center gap-4 text-center text-xl md:text-lg">
 
