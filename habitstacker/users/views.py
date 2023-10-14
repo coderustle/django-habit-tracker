@@ -32,7 +32,7 @@ def user_register(request: HttpRequest) -> HttpResponse:
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # because we have two authentication backends, Django dosen't knwo
+            # because we have two authentication backends, Django doesn't know
             # which one to use when to authenticate the user
             backend = "django.contrib.auth.backends.ModelBackend"
             login(request=request, user=user, backend=backend)
@@ -41,8 +41,6 @@ def user_register(request: HttpRequest) -> HttpResponse:
         else:
             messages.error(request, str(form.errors))
             return redirect("users:login")
-
-    return TemplateResponse(request, template, {"form": form})
 
 
 @require_http_methods(["GET", "POST"])
@@ -74,8 +72,6 @@ def user_login(request: HttpRequest) -> HttpResponse:
             else:
                 messages.error(request, "Invalid username or password")
                 return redirect("users:login")
-    messages.error(request, str(form.errors))
-    return TemplateResponse(request, template, {"form": form})
 
 
 def user_logout(request: HttpRequest) -> HttpResponse:
