@@ -1,5 +1,6 @@
 
-<div class="flex items-center bg-gray-200">
+<div hx-get="{% url 'core:navbar' %}" hx-swap="outerHTML" hx-trigger="updateNavbar"
+  class="flex items-center bg-gray-200">
   <div class="container flex flex-col p-4">
 
     <div class="flex items-center justify-between">
