@@ -1,0 +1,8 @@
+# ===================================================
+# Deployment
+# ===================================================
+- name: Deployment
+  hosts: dev
+  tasks:
+    - name: Check server connection
+      ansible.builtin.ping:

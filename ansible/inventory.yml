@@ -1,0 +1,7 @@
+---
+hosts:
+  localhost:
+
+dev:
+  hosts:
+    home
