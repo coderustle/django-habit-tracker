@@ -4,11 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
-from django.urls import reverse_lazy
 from django.views.decorators.http import require_http_methods
+from django.urls import reverse_lazy
 
-from ..core.utils import HtmxResponseRedirect
 from .forms import RegisterUserForm
 
 
@@ -33,17 +33,16 @@ def user_register(request: HttpRequest) -> HttpResponse:
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # because we have two authentication backends, Django dosen't knwo
+            # because we have two authentication backends, Django doesn't know
             # which one to use when to authenticate the user
             backend = "django.contrib.auth.backends.ModelBackend"
             login(request=request, user=user, backend=backend)
             messages.success(request, "Registration successful")
-            return HtmxResponseRedirect(redirect_to=reverse_lazy("core:home"))
+            return redirect("core:home")
         else:
             messages.error(request, str(form.errors))
-            return HtmxResponseRedirect(redirect_to=reverse_lazy("user:login"))
-
-    return TemplateResponse(request, template, {"form": form})
+            return redirect("user:register")
+    return redirect("user:register")
 
 
 @require_http_methods(["GET", "POST"])
@@ -71,16 +70,11 @@ def user_login(request: HttpRequest) -> HttpResponse:
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request=request, user=user)
-                return HtmxResponseRedirect(
-                    redirect_to=reverse_lazy("core:home")
-                )
+                return redirect("core:home")
             else:
                 messages.error(request, "Invalid username or password")
-                return HtmxResponseRedirect(
-                    redirect_to=reverse_lazy("user:login")
-                )
-    messages.error(request, str(form.errors))
-    return TemplateResponse(request, template, {"form": form})
+                return redirect("users:login")
+    return redirect("users:login")
 
 
 def user_logout(request: HttpRequest) -> HttpResponse:
@@ -88,7 +82,7 @@ def user_logout(request: HttpRequest) -> HttpResponse:
     Logs out the current user and redirects to the login page.
     """
     logout(request=request)
-    return HtmxResponseRedirect(redirect_to=reverse_lazy("users:login"))
+    return redirect("users:login")
 
 
 @login_required

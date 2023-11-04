@@ -3,7 +3,7 @@
 {% load webpack_static from webpack_loader %}
 
 <!DOCTYPE html>
-<html class="h-full">
+<html lang="en" class="h-full">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -12,6 +12,7 @@
           robots
           content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="description" content="Habitstacker" />
+    <meta name="keywords" content="habit tracker application" />
     {% block meta_social %}
       <meta property="og:locale" content="en_EN" />
       <meta property="og:type" content="Habitstacker" />
@@ -24,7 +25,7 @@
     <link rel="canonical" href="https://habitstacker.coderustle.com/" />
     <link rel="shortcut icon"
           type="image/png"
-          href="{% webpack_static 'images/favicon.ico' %}" />
+          href="{% webpack_static 'favicon.ico' %}" />
     <link rel="apple-touch-icon"
           type="image/png"
           href="{% webpack_static 'images/apple-touch-icon.png' %}">
@@ -44,8 +45,8 @@
     {% endblock header_script %}
 
   </head>
-  <body class="h-full font-worker text-white bg-gradient-to-r from-gray-800 to-gray-900">
-    <main id="main" class="h-full">
+  <body class="h-full bg-gradient-to-r from-gray-100 to-gray-200 font-worker">
+    <main x-data="{showMenu: false}" id="main" class="h-full overflow-hidden">
       <!-- Header -->
       {% block header %}
 
@@ -71,12 +72,14 @@
     </main>
     <!-- Javascript-->
     {% block footer_script %}
-      {% render_bundle 'htmx' 'js' %}
-      {% render_bundle 'index' 'js' %}
+      {% render_bundle 'index' 'js' skip_common_chunks=True %}
       <script>
-            document.body.addEventListener('htmx:configRequest', (event) => {
-            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-            });
+      document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+      });
+      document.body.addEventListener('updateNavbar', function() {
+        console.log('updateNavbar event fired!');
+      });
       </script>
     {% endblock footer_script %}
 

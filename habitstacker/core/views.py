@@ -13,6 +13,14 @@ def index(request: HttpRequest) -> HttpResponse:
     return TemplateResponse(request, template)
 
 
+def navbar(request: HttpRequest) -> HttpResponse:
+    """Render the navigation menu"""
+    template = "_navigation.html"
+    if request.htmx:
+        return TemplateResponse(request, template)
+    return HttpResponse()
+
+
 @login_required
 def home(request: HttpRequest) -> HttpResponse:
     """
