@@ -17,14 +17,19 @@ module.exports = {
    */
   entry: {
     /**
+     * Alpine JS
+     */
+    // alpine: "alpinejs",
+    /**
      * HTMX load
      */
-    htmx: "htmx.org",
+    // htmx: "htmx.org",
     /**
      * index.js entrypoint
      */
     index: {
       import: path.resolve(__dirname, "../habitstacker/assets/index.js"),
+      // dependOn: ["htmx", "alpine"],
     },
   },
   /**
@@ -120,11 +125,8 @@ module.exports = {
   /**
    * OPTIMIZATION
    */
-  /**
-   * OPTIMIZATION
-   */
   optimization: {
     minimize: false,
-    runtimeChunk: "single",
+    // runtimeChunk: "single",
   },
 };

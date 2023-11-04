@@ -1,43 +1,63 @@
+<div id="navigation" 
+  hx-get="{% url 'core:navbar' %}" 
+  hx-swap="outerHTML" 
+  hx-trigger="updateNavbar from:body"
+  class="flex items-center bg-gray-200">
+  <div class="container flex flex-col p-4">
 
-<div class="text-white shadow-lg">
-  <div class="container p-4 flex flex-col sm:flex-row gap-6 items-center sm:justify-between">
+    <div class="flex items-center justify-between">
+      <button @click.prevent="showMenu = !showMenu"
+              class="flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"
+             width="32"
+             height="32">
+          <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+        </svg>
+      </button>
 
-    <button hx-get="{% url "core:index" %}"
-            hx-push-url="true"
-            hx-swap="innerHTML"
-            hx-target="#main-content"
-            class="text-xl font-semibold flex flex-col items-center sm:items-start p-2 rounded border border-primary w-max hover:border-secondary transition-colors duration-500">
-      <span>Habit</span>
-      <span>Stacker</span>
-    </button>
+      <button hx-get="{% url "core:home" %}"
+              hx-push-url="true"
+              hx-swap="innerHTML"
+              hx-target="#main-content"
+              class="flex w-max items-center gap-2 p-2 text-3xl duration-500 transition-scale hover:scale-105 sm:items-start">
+        <span class="font-bold text-secondary">Habit</span>
+        <span class="font-bold">Stacker</span>
+      </button>
+    </div>
 
-    <nav class="font-semibold text-primary">
-      <ul class="flex gap-4 text-xl md:text-lg">
+    <nav x-cloak
+         x-transition
+         x-show="showMenu"
+         @click.prevent="showMenu = !showMenu"
+         class="relative w-full bg-gray-200 p-4">
+      <ul class="flex flex-col items-center justify-center gap-4 text-center text-xl md:text-lg">
 
         {% if user.is_authenticated %}
-          <li class="hover:text-secondary transition-colors duration-500">
+          <li class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:profile' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
                     class="cursor-pointer tracking-wider">Profile</button>
           </li>
-          <li class="hover:text-secondary transition-colors duration-500">
+          <li class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:logout' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
+                    hx-headers='{"HX-Trigger": "updateNavbar"}'
                     class="cursor-pointer tracking-wider">Logout</button>
           </li>
         {% else %}
-          <li class="hover:text-secondary transition-colors duration-500">
+          <li class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:login' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
                     class="cursor-pointer tracking-wider">Login</button>
           </li>
-          <li class="hover:text-secondary transition-colors duration-500">
+          <li class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:register' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -51,3 +71,11 @@
 
   </div>
 </div>
+
+
+<script>
+  document.body.addEventListener('updateNavbar', function() {
+    console.log('updateNavbar event fired!');
+});
+
+</script>
