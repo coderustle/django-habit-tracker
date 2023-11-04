@@ -1,5 +1,7 @@
-
-<div hx-get="{% url 'core:navbar' %}" hx-swap="outerHTML" hx-trigger="updateNavbar"
+<div id="navigation" 
+  hx-get="{% url 'core:navbar' %}" 
+  hx-swap="outerHTML" 
+  hx-trigger="updateNavbar from:body"
   class="flex items-center bg-gray-200">
   <div class="container flex flex-col p-4">
 
@@ -44,6 +46,7 @@
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
+                    hx-headers='{"HX-Trigger": "updateNavbar"}'
                     class="cursor-pointer tracking-wider">Logout</button>
           </li>
         {% else %}
@@ -68,3 +71,11 @@
 
   </div>
 </div>
+
+
+<script>
+  document.body.addEventListener('updateNavbar', function() {
+    console.log('updateNavbar event fired!');
+});
+
+</script>

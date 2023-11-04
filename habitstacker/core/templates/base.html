@@ -25,7 +25,7 @@
     <link rel="canonical" href="https://habitstacker.coderustle.com/" />
     <link rel="shortcut icon"
           type="image/png"
-          href="{% webpack_static 'images/favicon.ico' %}" />
+          href="{% webpack_static 'favicon.ico' %}" />
     <link rel="apple-touch-icon"
           type="image/png"
           href="{% webpack_static 'images/apple-touch-icon.png' %}">
@@ -74,9 +74,12 @@
     {% block footer_script %}
       {% render_bundle 'index' 'js' skip_common_chunks=True %}
       <script>
-  document.body.addEventListener('htmx:configRequest', (event) => {
-    event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-  });
+      document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+      });
+      document.body.addEventListener('updateNavbar', function() {
+        console.log('updateNavbar event fired!');
+      });
       </script>
     {% endblock footer_script %}
 

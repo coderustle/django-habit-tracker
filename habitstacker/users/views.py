@@ -7,6 +7,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
+from django.urls import reverse_lazy
 
 from .forms import RegisterUserForm
 
@@ -40,7 +41,8 @@ def user_register(request: HttpRequest) -> HttpResponse:
             return redirect("core:home")
         else:
             messages.error(request, str(form.errors))
-            return redirect("users:login")
+            return redirect("user:register")
+    return redirect("user:register")
 
 
 @require_http_methods(["GET", "POST"])
@@ -72,6 +74,7 @@ def user_login(request: HttpRequest) -> HttpResponse:
             else:
                 messages.error(request, "Invalid username or password")
                 return redirect("users:login")
+    return redirect("users:login")
 
 
 def user_logout(request: HttpRequest) -> HttpResponse:

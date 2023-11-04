@@ -7,7 +7,6 @@ import Alpine from "alpinejs";
  * Htmx setup
  */
 window.htmx = require("htmx.org");
-
 /**
  * Style
  */
