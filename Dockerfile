@@ -103,22 +103,13 @@ RUN python manage.py migrate
 # ********************************************************
 FROM python:3.11-slim-bookworm as production
 
-# Enable SSH in Azure App Service Custom Container
-# The passowrd is standard for Azure and needs to be like this
-ENV SSH_PASSWD "root:Docker!"
-
 RUN --mount=type=cache,target=/var/cache/apt-production \
-    apt-get update \
-    && apt-get install -y --no-install-recommends dialog \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends openssh-server \
-    && echo "$SSH_PASSWD" | chpasswd
+    apt-get update
 
 # Set the working directory
 WORKDIR /app
 
 # Copy config files
-COPY ./config/sshd_config /etc/ssh/
 COPY ./config/litestream.yml /etc/litestream.yml
 
 # Copy binaries from base
