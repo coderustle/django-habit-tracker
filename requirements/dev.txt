@@ -7,4 +7,4 @@ ruff
 pre-commit
 
 # deployment
-ansible-core
+ansible

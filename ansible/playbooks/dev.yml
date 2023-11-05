@@ -29,10 +29,12 @@
             single_branch: yes
             version: main
             force: true
+
         - name: Create .env file
           ansible.builtin.template:
             src: ../templates/env.j2
             dest: "{{ workdir }}/.env"
+            force: no
     # ===================================================
     # Docker build block
     # ===================================================
