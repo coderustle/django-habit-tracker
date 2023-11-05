@@ -3,6 +3,6 @@ dbs:
   - path: /app/database/prod.sqlite3
     replicas:
       - type: abs
-        account-name: coderustle
-        bucket: database
-        path: habitstacker/prod.sqlite3
+        account-name: stcoderustle
+        bucket: databases
+        path: prod.sqlite3
