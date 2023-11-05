@@ -22,16 +22,14 @@ def create_environment_variables():
         random.choice(string.ascii_letters + string.digits) for _ in range(50)
     )
     environments = f"""
-    LITESTREAM_AZURE_ACCOUNT_KEY=
-    DB_REPLICA_URL=
-    DB_STORAGE_ACCOUNT=
-    DB_CONTAINER=
-    DB_PATH=
-    DJANGO_DEBUG=True
-    SECRET_KEY={secret}
-    DJANGO_SETTINGS_MODULE=habitstacker.settings.dev
-    
-    
+LITESTREAM_AZURE_ACCOUNT_KEY=
+DB_REPLICA_URL=
+DB_STORAGE_ACCOUNT=
+DB_CONTAINER=
+DB_PATH=
+DJANGO_DEBUG=True
+SECRET_KEY={secret}
+DJANGO_SETTINGS_MODULE=habitstacker.settings.dev
     """
     env_path = PROJECT_ROOT / ".env"
     with open(env_path, "w") as env:
