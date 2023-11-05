@@ -2,6 +2,11 @@
 hosts:
   localhost:
 
-dev:
+production:
   hosts:
-    home
+    prod
+
+development:
+  hosts:
+    dev
+    

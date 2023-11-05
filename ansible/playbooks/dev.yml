@@ -1,0 +1,11 @@
+# ===================================================
+# Main playbook
+# ===================================================
+- name: Development playbook
+  hosts: dev
+  tasks:
+  # ===================================================
+  # Ping host and check if responds
+  # ===================================================
+    - name: Check if host is up and running
+      ansible.builtin.ping:
