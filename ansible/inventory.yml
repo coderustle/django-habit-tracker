@@ -1,0 +1,12 @@
+---
+hosts:
+  localhost:
+
+production:
+  hosts:
+    prod
+
+development:
+  hosts:
+    dev
+    

@@ -1,0 +1,43 @@
+# ===================================================
+# Development playbook
+# ===================================================
+- name: Development playbook
+  hosts: dev
+  become: false
+  vars_files:
+    - ../vars/common.yml
+  tasks:
+    # ===================================================
+    # Ping host and check if responds
+    # ===================================================
+    - name: Check if host is up and running
+      ansible.builtin.ping:
+      # ===================================================
+      # Pre-deployment block
+      # ===================================================
+    - name: Start pre-deployment block
+      block:
+        - name: Create workdir folder
+          ansible.builtin.file:
+            path: "{{ workdir }}"
+            state: directory
+            mode: '0755'
+        - name: Clone project repository
+          ansible.builtin.git:
+            repo: "{{ repo }}"
+            dest: "{{ workdir }}"
+            single_branch: yes
+            version: main
+            force: true
+
+        - name: Create .env file
+          ansible.builtin.template:
+            src: ../templates/env.j2
+            dest: "{{ workdir }}/.env"
+            force: no
+    # ===================================================
+    # Docker build block
+    # ===================================================
+
+
+

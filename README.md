@@ -30,3 +30,16 @@ Habit Stacker is a simple, user-friendly web application to help users track and
 5. Generate `.env` file by running `./script/bootstrap.py`
 6. Build development container `make dev-build`
 7. Run development container `make dev-run`
+
+## Environment variables
+
+```bash
+LITESTREAM_AZURE_ACCOUNT_KEY= # azure storage account key
+DB_REPLICA_URL= abs://storage-account-name@container/database-name
+DB_STORAGE_ACCOUNT= # storage account name
+DB_CONTAINER= # storage container name
+DB_PATH= # local path to database
+DJANGO_DEBUG=True
+SECRET_KEY= # Django secret key
+DJANGO_SETTINGS_MODULE=habitstacker.settings.dev
+```
