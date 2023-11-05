@@ -31,7 +31,10 @@ prod-build:
 
 prod-run:
 	docker run --name habitstacker -it --rm \
-	--env-file ./.env \
+	--env SECRET_KEY=$(SECRET_KEY) \
+	--env DJANGO_SETTINGS_MODULE=habitstacker.settings.prod \
+	--env PYTHON_REQUIREMENTS_FILE=prod \
+	--env LITESTREAM_AZURE_ACCOUNT_KEY=$(LITESTREAM_AZURE_ACCOUNT_KEY) \
 	-p 8000:8000 habitstacker:prod bash
 
 
