@@ -3,6 +3,7 @@ from .base import *
 ALLOWED_HOSTS = [
     "habitstacker.coderustle.com",
     "habitstacker.azurewebsites.net",
+    "coderustle.go.ro",
 ]
 
 # SECURITY
