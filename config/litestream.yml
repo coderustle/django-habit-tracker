@@ -1,8 +1,8 @@
 dbs:
   # Replicate production database in Azure Storage Account
-  - path: /app/database/prod.sqlite3
+  - path: ${DB_PATH}
     replicas:
       - type: abs
-        account-name: stcoderustle
-        bucket: databases
-        path: prod.sqlite3
+        account-name: ${DB_STORAGE_ACCOUNT}
+        bucket: ${DB_CONTAINER}
+        path: ${DB_NAME}
