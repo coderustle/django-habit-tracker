@@ -27,6 +27,7 @@ def create_environment_variables():
     This function create the .env file with the needed
     environment variables.
     """
+    settings = "habitstacker.settings.dev"
     secret = "".join(choice(ascii_letters + digits) for _ in range(50))
     environments = [
         EnvVar(name="LITESTREAM_AZURE_ACCOUNT_KEY", value=""),
@@ -36,9 +37,7 @@ def create_environment_variables():
         EnvVar(name="DB_PATH", value=""),
         EnvVar(name="DB_NAME", value=""),
         EnvVar(name="SECRET_KEY", value=secret),
-        EnvVar(
-            name="DJANGO_SETTINGS_MODULE", value="habitstacker.settings.dev"
-        ),
+        EnvVar(name="DJANGO_SETTINGS_MODULE", value=settings),
     ]
 
     env_path = PROJECT_ROOT / ".env"
