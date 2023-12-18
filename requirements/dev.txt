@@ -5,6 +5,3 @@ djlint
 black
 ruff
 pre-commit
-
-# deployment
-ansible
