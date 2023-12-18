@@ -70,34 +70,13 @@ RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 # ********************************************************
 FROM ${PYTHON_VERSION} AS development
 
-# Build parameters
-ARG DJANGO_SETTINGS_MODULE
-ARG SECRET_KEY
-
-ENV DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-ENV SECRET_KEY=${SECRET_KEY}
-
 # Set the working directory
-WORKDIR /app
-
-# Copy from static bundle
-COPY --from=bundle /app/habitstacker/static /app/habitstacker/static
-COPY --from=bundle /app/webpack /app/webpack
+WORKDIR /opt/app
 
 # Copy from base stage
 COPY --from=base /opt/venv /opt/venv
-COPY --from=base /app/staticfiles /app/staticfiles
 
 ENV PATH="/opt/venv/bin:$PATH"
-
-# Copy the project files
-COPY . .
-
-# Expose Django port
-EXPOSE 8000
-
-# Run migrations
-RUN python manage.py migrate
 
 # ********************************************************
 # * Docker Django - Production                           *
