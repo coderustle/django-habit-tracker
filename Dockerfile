@@ -2,6 +2,7 @@
 
 # requirements.txt file to install in virtual environment
 ARG PYTHON_REQUIREMENTS_FILE=prod
+ARG PYTHON_VERSION=python:3.12-slim-bookworm
 
 # ********************************************************
 # * BUNDLE STATIC FILES                                  *
@@ -25,7 +26,7 @@ RUN yarn install --frozen-lockfile && yarn run build:prod
 # ********************************************************
 # * BUILD PYTHON VIRTUAL ENVIRONMENT - BASE IMAGE        *
 # ********************************************************
-FROM python:3.11-slim-bookworm AS base
+FROM ${PYTHON_VERSION} AS base
 
 ARG PYTHON_REQUIREMENTS_FILE
 
@@ -67,7 +68,7 @@ RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 # ********************************************************
 # * Docker Django - Development                          *
 # ********************************************************
-FROM python:3.11-slim-bookworm AS development
+FROM ${PYTHON_VERSION} AS development
 
 # Build parameters
 ARG DJANGO_SETTINGS_MODULE
@@ -101,7 +102,7 @@ RUN python manage.py migrate
 # ********************************************************
 # * Docker Django - Production                           *
 # ********************************************************
-FROM python:3.11-slim-bookworm as production
+FROM ${PYTHON_VERSION} as production
 
 RUN --mount=type=cache,target=/var/cache/apt-production \
     apt-get update
