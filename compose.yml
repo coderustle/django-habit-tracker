@@ -8,8 +8,6 @@ services:
     command: yarn run build:dev
     volumes:
       - ./:/app
-    profiles:
-      - development
 
   litestream:
     container_name: litestream
