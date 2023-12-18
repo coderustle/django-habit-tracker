@@ -127,7 +127,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY . .
 
 # Expose django port
-EXPOSE 8000 2222
+EXPOSE 8000
 
 # Entrypoint
 ENTRYPOINT [ "scripts/init.sh" ]
