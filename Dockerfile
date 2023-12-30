@@ -2,6 +2,7 @@
 
 # requirements.txt file to install in virtual environment
 ARG PYTHON_REQUIREMENTS_FILE=prod
+ARG PYTHON_VERSION=python:3.12-slim-bookworm
 
 # ********************************************************
 # * BUNDLE STATIC FILES                                  *
@@ -25,7 +26,7 @@ RUN yarn install --frozen-lockfile && yarn run build:prod
 # ********************************************************
 # * BUILD PYTHON VIRTUAL ENVIRONMENT - BASE IMAGE        *
 # ********************************************************
-FROM python:3.11-slim-bookworm AS base
+FROM ${PYTHON_VERSION} AS base
 
 ARG PYTHON_REQUIREMENTS_FILE
 
@@ -61,64 +62,34 @@ RUN python manage.py collectstatic
 
 # Download the static build of Litestream directly into the path & make it executable.
 # This is done in the builder and copied as the chmod doubles the size.
-ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.11/litestream-v0.3.11-linux-amd64.tar.gz /tmp/litestream.tar.gz
+ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.13/litestream-v0.3.13-linux-amd64.tar.gz /tmp/litestream.tar.gz
 RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 
 # ********************************************************
 # * Docker Django - Development                          *
 # ********************************************************
-FROM python:3.11-slim-bookworm AS development
-
-# Build parameters
-ARG DJANGO_SETTINGS_MODULE
-ARG SECRET_KEY
-
-ENV DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-ENV SECRET_KEY=${SECRET_KEY}
+FROM ${PYTHON_VERSION} AS development
 
 # Set the working directory
-WORKDIR /app
-
-# Copy from static bundle
-COPY --from=bundle /app/habitstacker/static /app/habitstacker/static
-COPY --from=bundle /app/webpack /app/webpack
+WORKDIR /opt/app
 
 # Copy from base stage
 COPY --from=base /opt/venv /opt/venv
-COPY --from=base /app/staticfiles /app/staticfiles
 
 ENV PATH="/opt/venv/bin:$PATH"
-
-# Copy the project files
-COPY . .
-
-# Expose Django port
-EXPOSE 8000
-
-# Run migrations
-RUN python manage.py migrate
 
 # ********************************************************
 # * Docker Django - Production                           *
 # ********************************************************
-FROM python:3.11-slim-bookworm as production
-
-# Enable SSH in Azure App Service Custom Container
-# The passowrd is standard for Azure and needs to be like this
-ENV SSH_PASSWD "root:Docker!"
+FROM ${PYTHON_VERSION} as production
 
 RUN --mount=type=cache,target=/var/cache/apt-production \
-    apt-get update \
-    && apt-get install -y --no-install-recommends dialog \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends openssh-server \
-    && echo "$SSH_PASSWD" | chpasswd
+    apt-get update
 
 # Set the working directory
 WORKDIR /app
 
 # Copy config files
-COPY ./config/sshd_config /etc/ssh/
 COPY ./config/litestream.yml /etc/litestream.yml
 
 # Copy binaries from base
@@ -135,7 +106,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY . .
 
 # Expose django port
-EXPOSE 8000 2222
+EXPOSE 8000
 
 # Entrypoint
 ENTRYPOINT [ "scripts/init.sh" ]

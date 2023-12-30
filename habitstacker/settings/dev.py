@@ -8,6 +8,6 @@ ALLOWED_HOSTS = ["*"]
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "database/dev.sqlite3",
+        "NAME": BASE_DIR / "database/dev.sqlite3",  # noqa: F405
     }
 }
