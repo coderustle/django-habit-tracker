@@ -20,4 +20,3 @@ jobs:
         tag: "latest"
         environment: "Production"
         requirements: "prod"
-        target: "production"

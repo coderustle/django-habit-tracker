@@ -14,10 +14,6 @@ on:
         default: 'habitstacker'
         required: false
         type: string
-      target:
-        default: 'development'
-        required: false
-        type: string
       push:
         default: true
         required: false
@@ -59,7 +55,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          target: ${{ inputs.target }}
           push: ${{ inputs.push }}
           build-args: |
             SECRET_KEY=${{ secrets.SECRET_KEY }}

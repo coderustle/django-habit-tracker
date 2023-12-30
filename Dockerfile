@@ -66,19 +66,6 @@ ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.13/litestre
 RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 
 # ********************************************************
-# * Docker Django - Development                          *
-# ********************************************************
-FROM ${PYTHON_VERSION} AS development
-
-# Set the working directory
-WORKDIR /opt/app
-
-# Copy from base stage
-COPY --from=base /opt/venv /opt/venv
-
-ENV PATH="/opt/venv/bin:$PATH"
-
-# ********************************************************
 # * Docker Django - Production                           *
 # ********************************************************
 FROM ${PYTHON_VERSION} as production
