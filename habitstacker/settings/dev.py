@@ -1,6 +1,8 @@
+import os
 from .base import *  # noqa: F403
 
-ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

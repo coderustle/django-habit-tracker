@@ -17,15 +17,7 @@ build:
 run:
 	docker run --name habitstacker -it --rm \
 	--env SECRET_KEY=$(SECRET_KEY) \
-	--env DJANGO_SETTINGS_MODULE=habitstacker.settings.prod \
+	--env DJANGO_SETTINGS_MODULE=$(DJANGO_SETTINGS_MODULE) \
 	--env DB_PATH=$(DB_PATH) \
 	--env DB_REPLICA_PATH=$(DB_REPLICA_PATH) \
-	--entrypoint /bin/bash \
-	-p 8000:8000 habitstacker:prod
-
-#--------------------------------------------------------
-# Litestream commands
-#--------------------------------------------------------
-restore:
-	litestream restore -v -if-database-exists -o ./database/db.sqlite3 \
-	$(REPLICA_URL)
+	-p 8000:8000 habitstacker:dev

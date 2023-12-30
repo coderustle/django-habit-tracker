@@ -50,6 +50,10 @@ DB_PATH=/app/database/prod.sqlite3
 DB_REPLICA_PATH=/data/database/prod.sqlite3
 # REQUIRED: Django secret key
 SECRET_KEY=O1Kn8GzxXSEA5IBxj19fKTz15rQU2RWpVcMXV2D8GU4ZSATNk7
+# REQUIRED: Django allowed hosts
+ALLOWED_HOST=*
+# REQUIRED: For production you need to specify a list of trusted origins
+CSRF_TRUSTED_ORIGINS=http://localhost:8000
 # Required: Django app settings
 DJANGO_SETTINGS_MODULE=habitstacker.settings.dev
 ```
