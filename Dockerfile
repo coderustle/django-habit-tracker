@@ -90,7 +90,7 @@ RUN --mount=type=cache,target=/var/cache/apt-production \
 WORKDIR /app
 
 # Copy config files
-COPY ./config/litestream.yml /etc/litestream.yml
+COPY ./config/file_litestream.yml /etc/litestream.yml
 
 # Copy binaries from base
 COPY --from=base /opt/venv /opt/venv
