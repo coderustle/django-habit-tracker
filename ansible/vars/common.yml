@@ -1,3 +1,0 @@
-workdir: ~/apps/habitstacker
-django_settings_module: habitstacker.settings.prod
-repo: git@github.com:coderustle/habitstacker.git
