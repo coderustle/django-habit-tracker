@@ -21,25 +21,38 @@ Habit Stacker is a simple, user-friendly web application to help users track and
 - SQLite
 - Litestream
 
-## Run it locally using Docker
+## Run it locally using Docker compose
 
 1. Clone the repository `git clone https://github.com/coderustle/habitstacker.git`
 2. Change directory `cd habitstacker`
 3. Create a Python environment `python -m venv .venv`
 4. Activate virtual environment `source .venv/bin/activate`
 5. Generate `.env` file by running `./script/bootstrap.py`
-6. Build development container `make dev-build`
-7. Run development container `make dev-run`
+6. Run development container `docker compose up -d`
 
 ## Environment variables
 
 ```bash
-LITESTREAM_AZURE_ACCOUNT_KEY= # azure storage account key
-DB_REPLICA_URL= abs://storage-account-name@container/database-name
-DB_STORAGE_ACCOUNT= # storage account name
-DB_CONTAINER= # storage container name
-DB_PATH= # local path to database
-DJANGO_DEBUG=True
-SECRET_KEY= # Django secret key
+# OPTIONAL: Azure Storage Account Name
+AZURE_STORAGEACCOUNT=
+# OPTIONAL: Azure Storage Account Key 
+AZURE_ACCOUNTKEY=
+# OPTIONAL: AWS Access Key ID
+AWS_ACCESS_KEY_ID=AKIAxxxxxxxxxxxxxxxx
+# OPTIONAL: AWS Access Key Secret
+AWS_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/xxxxxxxxx
+# OPTIONAL: Azure Storage Container name or AWS Bucket name 
+BUCKETNAME=
+# REQUIRED: Path where database is stored. Default is app root folder.
+DB_PATH=/app/database/prod.sqlite3
+# REQUIRED: The full path of the replica database (AWS,Azure or Local)
+DB_REPLICA_PATH=/data/database/prod.sqlite3
+# REQUIRED: Django secret key
+SECRET_KEY=O1Kn8GzxXSEA5IBxj19fKTz15rQU2RWpVcMXV2D8GU4ZSATNk7
+# REQUIRED: Django allowed hosts
+ALLOWED_HOST=*
+# REQUIRED: For production you need to specify a list of trusted origins
+CSRF_TRUSTED_ORIGINS=http://localhost:8000
+# Required: Django app settings
 DJANGO_SETTINGS_MODULE=habitstacker.settings.dev
 ```

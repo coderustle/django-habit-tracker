@@ -1,0 +1,9 @@
+dbs:
+  # Replicate production database in Azure Storage Account
+  - path: ${DB_PATH}
+    replicas:
+      - type: abs
+        account-name: ${AZURE_STORAGEACCOUNT}
+        account-key: ${AZURE_ACCOUNTKEY}
+        bucket: ${BUCKETNAME} # container name
+        path: ${DB_REPLICA_PATH}

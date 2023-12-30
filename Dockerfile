@@ -66,20 +66,7 @@ ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.13/litestre
 RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 
 # ********************************************************
-# * Docker Django - Development                          *
-# ********************************************************
-FROM ${PYTHON_VERSION} AS development
-
-# Set the working directory
-WORKDIR /opt/app
-
-# Copy from base stage
-COPY --from=base /opt/venv /opt/venv
-
-ENV PATH="/opt/venv/bin:$PATH"
-
-# ********************************************************
-# * Docker Django - Production                           *
+# * BUILD PRODUCTION APP                                 *
 # ********************************************************
 FROM ${PYTHON_VERSION} as production
 
@@ -90,7 +77,7 @@ RUN --mount=type=cache,target=/var/cache/apt-production \
 WORKDIR /app
 
 # Copy config files
-COPY ./config/litestream.yml /etc/litestream.yml
+COPY ./config/file_litestream.yml /etc/litestream.yml
 
 # Copy binaries from base
 COPY --from=base /opt/venv /opt/venv

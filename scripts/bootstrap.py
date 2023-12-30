@@ -21,46 +21,33 @@ def main():
     This function create the .env file with the needed
     environment variables.
     """
+
+    database = [
+        EnvVar(name="AZURE_STORAGEACCOUNT", value=""),
+        EnvVar(name="AZURE_ACCOUNTKEY", value=""),
+        EnvVar(name="AWS_ACCESS_KEY_ID", value="AKIAxxxx"),
+        EnvVar(name="AWS_ACCESS_KEY", value=""),
+        EnvVar(name="BUCKETNAME", value=""),
+        EnvVar(name="DB_PATH", value="/app/database/prod.sqlite3"),
+        EnvVar(name="DB_REPLICA_PATH", value="/data/database/prod.sqlite3"),
+    ]
+    settings_file = "habitstacker.settings.dev"
     secret = "".join(choice(ascii_letters + digits) for _ in range(50))
-    environments = [
-        EnvVar(
-            name="LITESTREAM_AZURE_ACCOUNT_KEY",
-            value="",
-        ),
-        EnvVar(
-            name="DB_REPLICA_URL",
-            value="abs://account@container/prod.sqlite3",
-        ),
-        EnvVar(
-            name="DB_STORAGE_ACCOUNT",
-            value="",
-        ),
-        EnvVar(
-            name="DB_CONTAINER",
-            value="",
-        ),
-        EnvVar(
-            name="DB_PATH",
-            value="/app/database/prod.sqlite3",
-        ),
-        EnvVar(
-            name="DB_NAME",
-            value="",
-        ),
-        EnvVar(
-            name="SECRET_KEY",
-            value=secret,
-        ),
-        EnvVar(
-            name="DJANGO_SETTINGS_MODULE",
-            value="habitstacker.settings.dev",
-        ),
+    django = [
+        EnvVar(name="SECRET_KEY", value=secret),
+        EnvVar(name="ALLOWED_HOSTS", value="*"),
+        EnvVar(name="DJANGO_SETTINGS_MODULE", value=settings_file),
+        EnvVar(name="CSRF_TRUSTED_ORIGINS", value="http://localhost:8000"),
     ]
 
     # Create .env file
     env_path = PROJECT_ROOT / ".env"
     with open(env_path, "w") as env:
-        for var in environments:
+        env.write("# DATABASE SETTINGS\n")
+        for var in database:
+            env.write(f"{var.name}={var.value}\n")
+        env.write("\n# DJANGO SETTINGS\n")
+        for var in django:
             env.write(f"{var.name}={var.value}\n")
 
     subprocess.run(["yarn", "install"], shell=True)
