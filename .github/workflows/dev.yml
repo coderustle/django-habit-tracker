@@ -13,6 +13,7 @@ jobs:
   # Build Docker image
   # ==========================================================
   build:
+    if: github.event_name == 'push' && github.event.pull_request.merged != true
     uses: ./.github/workflows/reusable-build.yml
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
