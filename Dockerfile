@@ -66,7 +66,7 @@ ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.13/litestre
 RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 
 # ********************************************************
-# * Docker Django - Production                           *
+# * BUILD PRODUCTION APP                                 *
 # ********************************************************
 FROM ${PYTHON_VERSION} as production
 
