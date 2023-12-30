@@ -24,19 +24,27 @@ def main():
     secret = "".join(choice(ascii_letters + digits) for _ in range(50))
     environments = [
         EnvVar(
-            name="LITESTREAM_AZURE_ACCOUNT_KEY",
+            name="AZURE_STORAGEACCOUNT",
             value="",
+        ),
+        EnvVar(
+            name="AZURE_ACCOUNTKEY",
+            value="",
+        ),
+        EnvVar(
+            name="AWS_ACCESS_KEY_ID",
+            value="AKIAxxxxxxxxxxxxxxxx",
+        ),
+        EnvVar(
+            name="AWS_ACCESS_KEY",
+            value="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/xxxxxxxxx"
         ),
         EnvVar(
             name="DB_REPLICA_URL",
             value="abs://account@container/prod.sqlite3",
         ),
         EnvVar(
-            name="DB_STORAGE_ACCOUNT",
-            value="",
-        ),
-        EnvVar(
-            name="DB_CONTAINER",
+            name="BUCKETNAME",
             value="",
         ),
         EnvVar(
@@ -44,8 +52,8 @@ def main():
             value="/app/database/prod.sqlite3",
         ),
         EnvVar(
-            name="DB_NAME",
-            value="",
+            name="DB_REPLICA_PATH",
+            value="/data/database/prod.sqlite3",
         ),
         EnvVar(
             name="SECRET_KEY",
