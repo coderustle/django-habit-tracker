@@ -22,47 +22,26 @@ def main():
     environment variables.
     """
     secret = "".join(choice(ascii_letters + digits) for _ in range(50))
-    environments = [
-        EnvVar(
-            name="AZURE_STORAGEACCOUNT",
-            value="",
-        ),
-        EnvVar(
-            name="AZURE_ACCOUNTKEY",
-            value="",
-        ),
-        EnvVar(
-            name="AWS_ACCESS_KEY_ID",
-            value="AKIAxxxxxxxxxxxxxxxx",
-        ),
+    database = [
+        EnvVar(name="AZURE_STORAGEACCOUNT", value=""),
+        EnvVar(name="AZURE_ACCOUNTKEY", value=""),
+        EnvVar(name="AWS_ACCESS_KEY_ID", value="AKIAxxxxxxxxxxxxxxxx"),
         EnvVar(
             name="AWS_ACCESS_KEY",
-            value="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/xxxxxxxxx"
+            value="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/xxxxxxxxx",
         ),
         EnvVar(
             name="DB_REPLICA_URL",
             value="abs://account@container/prod.sqlite3",
         ),
-        EnvVar(
-            name="BUCKETNAME",
-            value="",
-        ),
-        EnvVar(
-            name="DB_PATH",
-            value="/app/database/prod.sqlite3",
-        ),
-        EnvVar(
-            name="DB_REPLICA_PATH",
-            value="/data/database/prod.sqlite3",
-        ),
-        EnvVar(
-            name="SECRET_KEY",
-            value=secret,
-        ),
-        EnvVar(
-            name="ALLOWED_HOSTS",
-            value="*",
-        ),
+        EnvVar(name="BUCKETNAME", value=""),
+        EnvVar(name="DB_PATH", value="/app/database/prod.sqlite3"),
+        EnvVar(name="DB_REPLICA_PATH", value="/data/database/prod.sqlite3"),
+    ]
+
+    django = [
+        EnvVar(name="SECRET_KEY", value=secret),
+        EnvVar(name="ALLOWED_HOSTS", value="*"),
         EnvVar(
             name="DJANGO_SETTINGS_MODULE",
             value="habitstacker.settings.dev",
@@ -72,7 +51,11 @@ def main():
     # Create .env file
     env_path = PROJECT_ROOT / ".env"
     with open(env_path, "w") as env:
-        for var in environments:
+        env.write("# DATABASE SETTINGS\n")
+        for var in database:
+            env.write(f"{var.name}={var.value}\n")
+        env.write("\n# DJANGO SETTINGS\n")
+        for var in django:
             env.write(f"{var.name}={var.value}\n")
 
     subprocess.run(["yarn", "install"], shell=True)
