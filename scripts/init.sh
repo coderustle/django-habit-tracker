@@ -11,7 +11,7 @@ if [ -f "$DB_PATH" ]; then
 	echo "Database already exists, skipping restore"
 else
 	echo "No database found, restoring from replica if exists"
-	litestream restore -v -if-replica-exists
+	litestream restore -if-replica-exists "$DB_PATH"
 fi
 
 # =========================================
