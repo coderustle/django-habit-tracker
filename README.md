@@ -34,12 +34,22 @@ Habit Stacker is a simple, user-friendly web application to help users track and
 ## Environment variables
 
 ```bash
-LITESTREAM_AZURE_ACCOUNT_KEY= # azure storage account key
-DB_REPLICA_URL= abs://storage-account-name@container/database-name
-DB_STORAGE_ACCOUNT= # storage account name
-DB_CONTAINER= # storage container name
-DB_PATH= # local path to database
-DJANGO_DEBUG=True
-SECRET_KEY= # Django secret key
+# OPTIONAL: Azure Storage Account Name
+AZURE_STORAGEACCOUNT=
+# OPTIONAL: Azure Storage Account Key 
+AZURE_ACCOUNTKEY=
+# OPTIONAL: AWS Access Key ID
+AWS_ACCESS_KEY_ID=AKIAxxxxxxxxxxxxxxxx
+# OPTIONAL: AWS Access Key Secret
+AWS_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/xxxxxxxxx
+# OPTIONAL: Azure Storage Container name or AWS Bucket name 
+BUCKETNAME=
+# REQUIRED: Path where database is stored. Default is app root folder.
+DB_PATH=/app/database/prod.sqlite3
+# REQUIRED: The full path of the replica database (AWS,Azure or Local)
+DB_REPLICA_PATH=/data/database/prod.sqlite3
+# REQUIRED: Django secret key
+SECRET_KEY=O1Kn8GzxXSEA5IBxj19fKTz15rQU2RWpVcMXV2D8GU4ZSATNk7
+# Required: Django app settings
 DJANGO_SETTINGS_MODULE=habitstacker.settings.dev
 ```
