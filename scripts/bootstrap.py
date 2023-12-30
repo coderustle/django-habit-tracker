@@ -60,6 +60,10 @@ def main():
             value=secret,
         ),
         EnvVar(
+            name="ALLOWED_HOSTS",
+            value="*",
+        ),
+        EnvVar(
             name="DJANGO_SETTINGS_MODULE",
             value="habitstacker.settings.dev",
         ),
