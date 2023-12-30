@@ -3,6 +3,7 @@ dbs:
   - path: ${DB_PATH}
     replicas:
       - type: abs
-        account-name: ${DB_STORAGE_ACCOUNT}
-        bucket: ${DB_CONTAINER}
-        path: ${DB_NAME}
+        account-name: ${AZURE_STORAGEACCOUNT}
+        account-key: ${AZURE_ACCOUNTKEY}
+        bucket: ${BUCKETNAME} # container name
+        path: ${DB_REPLICA_PATH}

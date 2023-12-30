@@ -1,0 +1,5 @@
+dbs:
+  # Replicate production database to a local path
+  - path: ${DB_PATH}
+    replicas:
+      path: ${DB_REPLICA_PATH}

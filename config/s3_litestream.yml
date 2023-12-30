@@ -1,0 +1,9 @@
+dbs:
+  # Replicate production database to AWS
+  - path: ${DB_PATH}
+    replicas:
+      - type: s3
+        access-key-id: ${AWS_ACCES_KEY_ID}
+        secret-access-key: ${AWS_ACCESS_KEY}
+        bucket: ${BUCKETNAME}
+        path: ${DB_REPLICA_PATH}
