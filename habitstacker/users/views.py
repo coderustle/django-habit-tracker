@@ -4,11 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
-from django.urls import reverse_lazy, reverse
-from django_htmx.http import trigger_client_event, HttpResponseClientRedirect
+from django.urls import reverse_lazy
+from django_htmx.http import HttpResponseClientRedirect
 
 
 from .forms import RegisterUserForm
@@ -73,9 +73,7 @@ def user_login(request: HttpRequest) -> HttpResponse:
             if user is not None:
                 login(request=request, user=user)
                 return redirect("core:home")
-            else:
-                messages.error(request, "Invalid username or password")
-                return redirect("users:login")
+    messages.error(request, "Invalid username or password")
     return redirect("users:login")
 
 

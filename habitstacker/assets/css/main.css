@@ -5,3 +5,12 @@
 @tailwind utilities;
 
 [x-cloak] { display: none !important; }
+
+@layer components {
+  .error {
+    @apply text-red-500;
+  }
+    .success {
+        @apply text-green-500;
+    }
+}
