@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # local apps
     "habitstacker.core.apps.CoreConfig",
     "habitstacker.users.apps.UsersConfig",
+    "habitstacker.habits.apps.HabitsConfig",
 ]
 
 MIDDLEWARE = [
