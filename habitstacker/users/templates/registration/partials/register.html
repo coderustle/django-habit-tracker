@@ -2,11 +2,15 @@
 
 <div id="main-content" class="h-full mt-6">
 
+  {% if messages %}
+    {% include "_messages.html" with messages=messages %}
+  {% endif %}
+
   <div class="container p-4 h-3/4 max-w-2xl">
 
     <div class="max-w-sm mx-auto px-4">
 
-      <form method="post" action="{% url 'users:register' %}">
+      <form method="post" hx-post="{% url 'users:register' %}" hx-swap="innerHTML" hx-target="#main-content">
         {% csrf_token %}
         <div class="w-full space-y-2">
           {% render_field form.username placeholder=form.username.label class="border-b border-primary py-4 bg-transparent rounded-sm focus:outline-none focus:border-secondary w-full" %}
@@ -15,10 +19,10 @@
           {% render_field form.password2 placeholder=form.password2.label class="border-b border-primary py-4 bg-transparent rounded-sm focus:outline-none focus:border-secondary w-full" %}
         </div>
         <div class="my-10">
-          <input type="hidden" name="next" value="{{ next }}" />
+          <input type="hidden" name="next" value="{{ next }}"/>
           <input type="submit"
                  value="Register"
-                 class="block w-full rounded-md border border-primary py-2 text-lg hover:cursor-pointer hover:shadow-lg focus:border-secondary focus:outline-none hover:border-secondary transition-colors duration-500" />
+                 class="block w-full rounded-md border border-primary py-2 text-lg hover:cursor-pointer hover:shadow-lg focus:border-secondary focus:outline-none hover:border-secondary transition-colors duration-500"/>
         </div>
 
       </form>

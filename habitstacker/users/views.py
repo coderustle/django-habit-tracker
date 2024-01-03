@@ -43,8 +43,8 @@ def user_register(request: HttpRequest) -> HttpResponse:
             return redirect("core:home")
         else:
             messages.error(request, str(form.errors))
-            return redirect("user:register")
-    return redirect("user:register")
+            return redirect("users:register")
+    return redirect("users:register")
 
 
 @require_http_methods(["GET", "POST"])
