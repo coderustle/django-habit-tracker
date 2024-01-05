@@ -7,8 +7,6 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_http_methods
-from django.urls import reverse_lazy
-from django_htmx.http import HttpResponseClientRedirect
 
 
 from .forms import RegisterUserForm
@@ -82,8 +80,7 @@ def user_logout(request: HttpRequest) -> HttpResponse:
     Logs out the current user and redirects to the login page.
     """
     logout(request=request)
-    url = reverse_lazy("users:login")
-    return HttpResponseClientRedirect(redirect_to=url)
+    return redirect("users:login")
 
 
 @login_required
