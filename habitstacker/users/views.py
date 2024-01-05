@@ -38,7 +38,7 @@ def user_register(request: HttpRequest) -> HttpResponse:
             backend = "django.contrib.auth.backends.ModelBackend"
             login(request=request, user=user, backend=backend)
             messages.success(request, "Registration successful")
-            return redirect("core:home")
+            return redirect("habits:home")
         else:
             messages.error(request, str(form.errors))
             return redirect("users:register")
@@ -70,7 +70,7 @@ def user_login(request: HttpRequest) -> HttpResponse:
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request=request, user=user)
-                return redirect("core:home")
+                return redirect("habits:home")
     messages.error(request, "Invalid username or password")
     return redirect("users:login")
 
