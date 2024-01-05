@@ -15,7 +15,7 @@
         </svg>
       </button>
 
-      <button hx-get="{% url "core:home" %}"
+      <button hx-get="{% url "habits:home" %}"
               hx-push-url="true"
               hx-swap="innerHTML"
               hx-target="#main-content"
@@ -33,6 +33,15 @@
       <ul class="flex flex-col items-center justify-center gap-4 text-center text-xl md:text-lg">
 
         {% if user.is_authenticated %}
+          <li
+            class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            <button hx-get="{% url 'habits:home' %}"
+                    hx-swap="innerHTML"
+                    hx-target="#main-content"
+                    hx-push-url="true"
+                    class="cursor-pointer tracking-wider">Home
+            </button>
+          </li>
           <li
             class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:profile' %}"
