@@ -1,5 +1,9 @@
 <div id="main-content" class="mt-6 h-full">
 
+  {% if messages %}
+    {% include "_messages.html" with messages=messages %}
+  {% endif %}
+
   <div class="container h-3/4 max-w-2xl p-4">
 
     <div class="flex justify-between border-b py-4">
