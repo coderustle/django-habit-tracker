@@ -4,8 +4,8 @@
      id="messages" role="alert">
     <span {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</span>
     <span id="button-msg" class="inline-block">
-      <svg v-on:click="hideMessages"
-           class="h-6 w-6 fill-current"
+      <svg
+           class="h-8 w-8 fill-current"
            role="button"
            xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 20 20">
@@ -19,13 +19,13 @@
 </div>
 
 <script>
-    let messages = document.getElementById("messages")
-    let button = document.getElementById("button-msg")
 
-    button.addEventListener('click', event => {
-        messages.style.display = "none";
+  document.getElementById("button-msg").addEventListener('click', event => {
+      document.getElementById("messages").remove();
     });
-    setTimeout(() => {
-         messages.style.display = "none";
-    }, 5000);
+
+  setTimeout(() => {
+    document.getElementById("messages").remove();
+  }, 5000);
+
 </script>
