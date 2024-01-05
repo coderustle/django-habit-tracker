@@ -5,20 +5,5 @@
 {% endblock title %}
 
 {% block content %}
-  <div id="main-content" class="mt-6 h-full">
-    
-    {% if messages %}
-      {% include "_messages.html" with messages=messages %}
-    {% endif %}
-  
-    <div class="container h-3/4 max-w-2xl p-4">
-
-      <div class="flex justify-between border-b py-4">
-        <h1 class="text-3xl font-bold tracking-wider">Habits</h1>
-        <button class="rounded px-4 py-2 bg-secondary">Add habit</button>
-      </div>
-
-    </div>
-
-  </div>
+  {% include "core/partials/home.html" %}
 {% endblock content %}
