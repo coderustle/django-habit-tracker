@@ -14,3 +14,13 @@ def home(request: HttpRequest) -> HttpResponse:
         template = "core/partials/home.html"
 
     return TemplateResponse(request, template)
+
+
+@login_required
+def add_habit(request: HttpRequest) -> HttpResponse:
+    pass
+
+
+@login_required
+def log_habit(request: HttpRequest) -> HttpResponse:
+    pass
