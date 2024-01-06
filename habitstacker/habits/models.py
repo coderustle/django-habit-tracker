@@ -17,9 +17,6 @@ class Habit(models.Model):
         default_permissions = ("add", "change", "delete")
         permissions = (("view_habit", "View Habit Objects"),)
 
-    def get_absolute_url(self):
-        return reverse("budget:details", kwargs={"pk": self.pk})
-
     def __str__(self) -> str:
         return self.title
 
