@@ -34,7 +34,7 @@
 
         {% if user.is_authenticated %}
           <li
-            class="w-full md:w-max border-b border-gray-300 md:border-0 p-2 transition-colors duration-500 hover:text-secondary">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary">
             <button hx-get="{% url 'habits:home' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -43,7 +43,7 @@
             </button>
           </li>
           <li
-            class="w-full md:w-max border-b border-gray-300 md:border-0 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:profile' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -52,7 +52,7 @@
             </button>
           </li>
           <li
-            class="w-full md:w-max border-b border-gray-300 md:border-0 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:logout' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -62,7 +62,7 @@
           </li>
         {% else %}
           <li
-            class="w-full md:w-max border-b border-gray-300 md:border-0 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:login' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -71,7 +71,7 @@
             </button>
           </li>
           <li
-            class="w-full md:w-max border-b border-gray-300 md:border-0 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:register' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
