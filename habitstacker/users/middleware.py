@@ -7,5 +7,5 @@ class RedirectIfLoggedInMiddleware:
 
     def __call__(self, request):
         if request.user.is_authenticated and request.path == "/users/login":
-            return redirect("core:home")  # Redirect to the home page
+            return redirect("habits:home")  # Redirect to the home page
         return self.get_response(request)
