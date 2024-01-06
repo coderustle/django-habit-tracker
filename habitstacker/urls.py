@@ -20,6 +20,6 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", include("habitstacker.users.urls", namespace="users")),
-    path("habits", include("habitstacker.habits.urls", namespace="habits")),
+    path("habits/", include("habitstacker.habits.urls", namespace="habits")),
     path("", include("habitstacker.core.urls", namespace="core")),
 ]

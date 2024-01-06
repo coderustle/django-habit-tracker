@@ -1,12 +1,10 @@
-<div id="navigation"
-     hx-get="{% url 'core:navbar' %}"
-     hx-swap="outerHTML"
-     class="flex items-center bg-gray-200">
-  <div class="container flex flex-col p-4">
+<div id="navigation" class="flex items-center bg-gray-200 border-2">
+
+  <div class="container flex flex-col md:flex-row-reverse md:justify-between p-4">
 
     <div class="flex items-center justify-between">
       <button @click.prevent="showMenu = !showMenu"
-              class="flex items-center justify-center">
+              class="flex items-center justify-center md:hidden">
         <svg xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 24 24"
              width="32"
@@ -27,14 +25,13 @@
 
     <nav x-cloak
          x-transition
-         x-show="showMenu"
          @click.prevent="showMenu = !showMenu"
-         class="relative w-full bg-gray-200 p-4">
-      <ul class="flex flex-col items-center justify-center gap-4 text-center text-xl md:text-lg">
+         :class="showMenu ? 'md:block relative w-full md:w-max bg-gray-200 p-4' : 'hidden md:block relative w-full md:w-max bg-gray-200 p-4'">
+      <ul class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4 text-center md:text-left text-xl md:text-lg">
 
         {% if user.is_authenticated %}
           <li
-            class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary">
             <button hx-get="{% url 'habits:home' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -43,7 +40,7 @@
             </button>
           </li>
           <li
-            class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:profile' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -52,7 +49,7 @@
             </button>
           </li>
           <li
-            class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:logout' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -62,7 +59,7 @@
           </li>
         {% else %}
           <li
-            class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:login' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -71,7 +68,7 @@
             </button>
           </li>
           <li
-            class="w-full border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:register' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
@@ -85,4 +82,5 @@
     </nav>
 
   </div>
+
 </div>

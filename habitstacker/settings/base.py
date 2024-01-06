@@ -92,7 +92,7 @@ AUTH_USER_MODEL = "users.User"
 LOGIN_URL = "/users/login/"
 
 # https://docs.djangoproject.com/en/4.0/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "/habits/home"
 
 # https://docs.djangoproject.com/en/4.0/ref/settings/#logout-redirect-url
 LOGOUT_REDIRECT_URL = "/users/login/"

@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
-from django.shortcuts import redirect
 from django.template.response import TemplateResponse
+from django.urls import reverse
 from django.views.decorators.http import require_http_methods
+from django_htmx.http import HttpResponseClientRedirect
 
 
 from .forms import RegisterUserForm
@@ -38,11 +39,9 @@ def user_register(request: HttpRequest) -> HttpResponse:
             backend = "django.contrib.auth.backends.ModelBackend"
             login(request=request, user=user, backend=backend)
             messages.success(request, "Registration successful")
-            return redirect("habits:home")
-        else:
-            messages.error(request, str(form.errors))
-            return redirect("users:register")
-    return redirect("users:register")
+            return HttpResponseClientRedirect(reverse("habits:home"))
+        messages.error(request, str(form.errors))
+        return TemplateResponse(request, template, {"form": form})
 
 
 @require_http_methods(["GET", "POST"])
@@ -70,9 +69,9 @@ def user_login(request: HttpRequest) -> HttpResponse:
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request=request, user=user)
-                return redirect("habits:home")
-    messages.error(request, "Invalid username or password")
-    return redirect("users:login")
+                return HttpResponseClientRedirect(reverse("habits:home"))
+        messages.error(request, "Invalid username or password")
+        return TemplateResponse(request, template, {"form": form})
 
 
 def user_logout(request: HttpRequest) -> HttpResponse:
@@ -80,7 +79,7 @@ def user_logout(request: HttpRequest) -> HttpResponse:
     Logs out the current user and redirects to the login page.
     """
     logout(request=request)
-    return redirect("users:login")
+    return HttpResponseClientRedirect(reverse("users:login"))
 
 
 @login_required
