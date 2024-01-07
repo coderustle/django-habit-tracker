@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from habitstacker.habits.models import Habit, HabitLog
+
+
+@admin.register(Habit)
+class HabitAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(HabitLog)
+class HabitLogAdmin(admin.ModelAdmin):
+    pass
