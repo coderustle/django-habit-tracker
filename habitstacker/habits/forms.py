@@ -10,4 +10,4 @@ class AddHabitForm(forms.ModelForm):
 
     class Meta:
         model = Habit
-        fields = ["name"]
+        fields = ["title"]

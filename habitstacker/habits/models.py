@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.urls import reverse
 from guardian.models import GroupObjectPermissionBase, UserObjectPermissionBase
 
 
@@ -23,7 +22,9 @@ class Habit(models.Model):
 
 class HabitLog(models.Model):
     date = models.DateField(auto_now_add=True)
-    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
+    habit = models.ForeignKey(
+        Habit, on_delete=models.CASCADE, related_name="logs"
+    )
     completed = models.BooleanField(default=False)
 
     class Meta:

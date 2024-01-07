@@ -1,0 +1,29 @@
+<div id="main-content" class="mt-6 h-full">
+
+  {% if messages %}
+    {% include "_messages.html" with messages=messages %}
+  {% endif %}
+
+  <div class="container h-3/4 max-w-2xl p-4">
+
+    <div class="flex justify-between border-b py-4">
+      <h1 class="text-3xl font-bold tracking-wider">Habits</h1>
+      <button
+        hx-get="{% url 'habits:add' %}"
+        hx-target="#add-habit"
+        class="rounded px-4 py-2 bg-secondary">Add habit</button>
+    </div>
+
+    <div id="add-habit"></div>
+
+    <div id="list-habits">
+      <form class="flex flex-col gap-2 text-lg mt-4">
+        {% for habit in habits %}
+          <p contentEditable="true">{{ habit }}</p>
+        {% endfor %}
+      </form>
+    </div>
+
+  </div>
+
+</div>
