@@ -1,9 +1,6 @@
-from datetime import date
-
 from django.contrib.auth.decorators import login_required
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
-from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django_htmx.http import HttpResponseClientRedirect
