@@ -1,5 +1,7 @@
 {% load widget_tweaks %}
-<form method="post" hx-post="{% url 'habits:add' %}">
+<form method="post"
+      hx-post="{% url 'habits:add' %}"
+      hx-target="#main-content">
   <div class="mt-4 bg-white rounded-md px-4">
     <div class="flex gap-4 items-center">
       <div class="w-full space-y-2">
