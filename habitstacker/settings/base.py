@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     "guardian",
     "django_htmx",
     # local apps
-    "habitstacker.core.apps.CoreConfig",
-    "habitstacker.users.apps.UsersConfig",
-    "habitstacker.habits.apps.HabitsConfig",
+    "apps.core.apps.CoreConfig",
+    "apps.users.apps.UsersConfig",
+    "apps.habits.apps.HabitsConfig",
 ]
 
 MIDDLEWARE = [
