@@ -31,7 +31,7 @@
         href="{% webpack_static 'images/apple-touch-icon.png' %}">
   <!-- Load CSS -->
   {% block stylesheet %}
-    {% render_bundle 'index' 'css' %}
+    {% render_bundle 'main' 'css' %}
   {% endblock stylesheet %}
 
   <title>
@@ -67,7 +67,7 @@
 </main>
 <!-- Javascript-->
 {% block footer_script %}
-  {% render_bundle 'index' 'js' skip_common_chunks=True %}
+  {% render_bundle 'main' 'js' skip_common_chunks=True %}
   <script>
     document.body.addEventListener('htmx:configRequest', (event) => {
       event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
