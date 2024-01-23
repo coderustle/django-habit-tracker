@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     "guardian",
     "django_htmx",
     # local apps
-    "habitstacker.core.apps.CoreConfig",
-    "habitstacker.users.apps.UsersConfig",
-    "habitstacker.habits.apps.HabitsConfig",
+    "apps.core.apps.CoreConfig",
+    "apps.users.apps.UsersConfig",
+    "apps.habits.apps.HabitsConfig",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",  # htmx
-    "habitstacker.users.middleware.RedirectIfLoggedInMiddleware",
+    "apps.users.middleware.RedirectIfLoggedInMiddleware",
 ]
 
 ROOT_URLCONF = "habitstacker.urls"
@@ -167,7 +167,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 WEBPACK_LOADER = {
     "DEFAULT": {
         "CACHE": not DEBUG,
-        "STATS_FILE": os.path.join(BASE_DIR, "webpack/webpack-stats.json"),
+        "STATS_FILE": os.path.join(BASE_DIR, "webpack-stats.json"),
         "POLL_INTERVAL": 0.1,
         "IGNORE": [r".+\.hot-update.js", r".+\.map"],
     }

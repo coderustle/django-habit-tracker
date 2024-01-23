@@ -120,4 +120,4 @@ habitstacker/static/**
 **/*.sqlite3.tmp-wal
 
 # Ignore webpack stats
-webpack/webpack-stats.json
+webpack-stats.json

@@ -2,8 +2,8 @@
   "name": "habitstacker",
   "packageManager": "yarn@3.6.4",
   "scripts": {
-    "build:dev": "webpack --watch --config ./webpack/webpack.config.dev.js",
-    "build:prod": "webpack --config ./webpack/webpack.config.prod.js"
+    "build:dev": "webpack --watch",
+    "build:prod": "webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",

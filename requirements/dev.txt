@@ -1,7 +1,0 @@
--r prod.txt
-
-# formatting
-djlint
-black
-ruff
-pre-commit
