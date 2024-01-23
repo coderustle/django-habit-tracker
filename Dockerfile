@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
 
 # requirements.txt file to install in virtual environment
-ARG PYTHON_REQUIREMENTS_FILE=prod
 ARG PYTHON_VERSION=python:3.12-slim-bookworm
 
 # ********************************************************
