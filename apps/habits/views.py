@@ -4,10 +4,12 @@ from django.http.response import HttpResponse
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django_htmx.http import HttpResponseClientRedirect
+from django.utils import timezone
 from guardian.shortcuts import get_objects_for_user, assign_perm
 from django.views.decorators.http import require_http_methods
 
 from .forms import AddHabitForm
+from .models import HabitLog
 
 
 @login_required
@@ -19,7 +21,11 @@ def home(request: HttpRequest) -> HttpResponse:
     if request.htmx:
         template = "habits/partials/home.html"
 
-    habits = get_objects_for_user(request.user, "habits.view_habit")
+    today = timezone.now().date()
+
+    habits = get_objects_for_user(request.user, "habits.view_habit").exclude(
+        logs__date=today
+    )
 
     return TemplateResponse(request, template, {"habits": habits})
 
@@ -66,5 +72,7 @@ def list_habit(request: HttpRequest) -> HttpResponse:
 
 
 @login_required
-def log_habit(request: HttpRequest) -> HttpResponse:
-    pass
+def log_habit(request: HttpRequest, id: int) -> HttpResponse:
+    if request.method == "POST":
+        habit = ""
+        return HttpResponseClientRedirect(reverse("habits:home"))
