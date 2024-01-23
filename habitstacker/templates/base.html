@@ -1,79 +1,66 @@
 {% load static %}
 {% load render_bundle from webpack_loader %}
 {% load webpack_static from webpack_loader %}
-
 <!DOCTYPE html>
 <html lang="en" class="h-full">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name
-        robots
-        content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <meta name="description" content="Habitstacker"/>
-  <meta name="keywords" content="habit tracker application"/>
-  {% block meta_social %}
-    <meta property="og:locale" content="en_EN"/>
-    <meta property="og:type" content="Habitstacker"/>
-    <meta property="og:title" content="Habitstacker"/>
-    <meta property="og:description" content="Habitstacker"/>
-    <meta property="og:url" content="https://budgetapp.madalintech.com/"/>
-    <meta property="og:site_name" content="Habitstacker"/>
-  {% endblock meta_social %}
-
-  <link rel="canonical" href="https://habitstacker.coderustle.com/"/>
-  <link rel="shortcut icon"
-        type="image/png"
-        href="{% webpack_static 'images/favicon.ico' %}"/>
-  <link rel="apple-touch-icon"
-        type="image/png"
-        href="{% webpack_static 'images/apple-touch-icon.png' %}">
-  <!-- Load CSS -->
-  {% block stylesheet %}
-    {% render_bundle 'main' 'css' %}
-  {% endblock stylesheet %}
-
-  <title>
-    {% block title %}
-      Habitstacker
-    {% endblock title %}
-
-  </title>
-  {% block header_script %}
-    <!-- Load JS -->
-  {% endblock header_script %}
-
-</head>
-<body class="h-full bg-gradient-to-r from-gray-100 to-gray-200 font-worker">
-<main x-data="{showMenu: false}" id="main" class="h-full overflow-hidden">
-  <!-- Header -->
-  {% block header %}
-
-    <div>
-      {% include "_navigation.html" %}
-    </div>
-
-  {% endblock header %}
-
-  <!-- Main content-->
-  {% block content %}
-  {% endblock content %}
-
-  <!-- Footer -->
-  {% block footer %}
-  {% endblock footer %}
-
-</main>
-<!-- Javascript-->
-{% block footer_script %}
-  {% render_bundle 'main' 'js' skip_common_chunks=True %}
-  <script>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name
+          robots
+          content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="description" content="Habitstacker" />
+    <meta name="keywords" content="habit tracker application" />
+    {% block meta_social %}
+      <meta property="og:locale" content="en_EN" />
+      <meta property="og:type" content="Habitstacker" />
+      <meta property="og:title" content="Habitstacker" />
+      <meta property="og:description" content="Habitstacker" />
+      <meta property="og:url" content="https://budgetapp.madalintech.com/" />
+      <meta property="og:site_name" content="Habitstacker" />
+    {% endblock meta_social %}
+    <link rel="canonical" href="https://habitstacker.coderustle.com/" />
+    <link rel="shortcut icon"
+          type="image/png"
+          href="{% webpack_static 'images/favicon.ico' %}" />
+    <link rel="apple-touch-icon"
+          type="image/png"
+          href="{% webpack_static 'images/apple-touch-icon.png' %}">
+    <!-- Load CSS -->
+    {% block stylesheet %}
+      {% render_bundle 'main' 'css' %}
+    {% endblock stylesheet %}
+    <title>
+      {% block title %}
+        Habitstacker
+      {% endblock title %}
+    </title>
+    {% block header_script %}
+      <!-- Load JS -->
+    {% endblock header_script %}
+  </head>
+  <body class="h-full bg-gradient-to-r from-gray-100 to-gray-200 font-worker">
+    <main x-data="{showMenu: false}" id="main" class="h-full">
+      <!-- Header -->
+      {% block header %}
+        <div>{% include "_navigation.html" %}</div>
+      {% endblock header %}
+      <!-- Main content-->
+      {% block content %}
+      {% endblock content %}
+      <!-- Footer -->
+      {% block footer %}
+      {% endblock footer %}
+    </main>
+    <!-- Javascript-->
+    {% block footer_script %}
+      {% render_bundle 'main' 'js' skip_common_chunks=True %}
+      <script>
     document.body.addEventListener('htmx:configRequest', (event) => {
       event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
     });
-  </script>
-{% endblock footer_script %}
-
-</body>
+      </script>
+    {% endblock footer_script %}
+  </body>
 </html>
