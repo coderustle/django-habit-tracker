@@ -1,6 +1,6 @@
 module.exports = {
   mode: "jit",
-  content: ["./habitstacker/**/*.{html,js}"],
+  content: ["**/*.{html,js}"],
   theme: {
     extend: {
       container: { center: true },
