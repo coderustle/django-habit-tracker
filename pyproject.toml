@@ -53,6 +53,8 @@ dependencies = [
   "pre-commit",
 ]
 [tool.hatch.envs.default.scripts]
+server = "python manage.py runserver"
+build = "yarn run build:dev"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
