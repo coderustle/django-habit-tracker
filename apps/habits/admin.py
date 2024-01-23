@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from habitstacker.habits.models import Habit, HabitLog
+from apps.habits.models import Habit, HabitLog
 
 
 @admin.register(Habit)
