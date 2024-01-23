@@ -59,7 +59,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",  # htmx
-    "habitstacker.users.middleware.RedirectIfLoggedInMiddleware",
+    "apps.users.middleware.RedirectIfLoggedInMiddleware",
 ]
 
 ROOT_URLCONF = "habitstacker.urls"
