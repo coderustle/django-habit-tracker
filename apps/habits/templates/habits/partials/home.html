@@ -11,12 +11,18 @@
     </div>
     <div id="add-habit"></div>
     <div id="list-habits">
-      <form class="flex flex-col gap-2 mt-4">
+      <form class="flex flex-col gap-4 mt-4 mb-6">
         {% for habit in habits %}
           <div class="p-4 bg-white rounded-md text-lg flex justify-between items-center">
-            <div>
-              <span class="text-gray-500">Title:</span>
-              <span>{{ habit }}</span>
+            <div class="w-full flex flex-col justify-between h-16 md:h-14">
+              <div class="text-lg">
+                <span class="text-gray-500">Title:</span>
+                <span>{{ habit }}</span>
+              </div>
+              <div class="text-gray-500 text-base flex gap-4">
+                <button class="hover:text-secondary">Edit</button>
+                <button class="hover:text-secondary">Delete</button>
+              </div>
             </div>
             <button class="flex items-center"
                     hx-target="#main-content"
@@ -31,7 +37,7 @@
       <div class="border-b my-4 py-4">
         <h2 class="text-2xl text-gray-500 tracking-wider">Completed</h2>
       </div>
-      <div class="space-y-2">
+      <div class="space-y-4 mb-10">
         {% for habit in logs %}
           <div class="p-4 bg-white border border-green-300 rounded-md text-lg flex justify-between items-center">
             <div class="line-through">
