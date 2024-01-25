@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <div id="main-content" class="my-6 h-full">
   {% if messages %}
     {% include "_messages.html" with messages=messages %}
@@ -13,15 +14,22 @@
     <div id="list-habits">
       <form class="flex flex-col gap-4 mt-4 mb-6">
         {% for habit in habits %}
-          <div class="p-4 bg-white rounded-md text-lg flex justify-between items-center">
-            <div class="w-full flex flex-col justify-between h-16 md:h-14">
-              <div class="text-lg">
-                <span class="text-gray-500">Title:</span>
-                <span>{{ habit }}</span>
+          <div id="habit-content"
+               class="p-4 bg-white rounded-md text-lg flex justify-between items-center">
+            <div class="w-full flex flex-col justify-between">
+              <div class="text-lg flex gap-4">
+                <input type="text"
+                       name="habit"
+                       value="{{ habit }}"
+                       id="{{ habit.id }}"
+                       hx-post="{% url 'habits:update' pk=habit.id %}"
+                       hx-trigger="blur"
+                       class="w-full py-2 text-lg focus:outline-none">
               </div>
               <div class="text-gray-500 text-base flex gap-4">
-                <button class="hover:text-secondary">Edit</button>
-                <button class="hover:text-secondary">Delete</button>
+                <button hx-post="{% url 'habits:delete' pk=habit.id %}"
+                        hx-target="#main-content"
+                        class="hover:text-secondary">Delete</button>
               </div>
             </div>
             <button class="flex items-center"
@@ -41,7 +49,6 @@
         {% for habit in logs %}
           <div class="p-4 bg-white border border-green-300 rounded-md text-lg flex justify-between items-center">
             <div class="line-through">
-              <span class="text-gray-500">Title:</span>
               <span>{{ habit }}</span>
             </div>
             <button class="flex items-center"

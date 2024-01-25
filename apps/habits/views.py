@@ -21,6 +21,8 @@ def home(request: HttpRequest) -> HttpResponse:
     if request.htmx:
         template = "habits/partials/home.html"
 
+    form = AddHabitForm()
+
     today = timezone.now().date()
 
     logs = get_objects_for_user(request.user, "habits.view_habit_log").filter(
@@ -30,7 +32,15 @@ def home(request: HttpRequest) -> HttpResponse:
         logs__date=today
     )
 
-    return TemplateResponse(request, template, {"habits": habits, "logs": logs})
+    return TemplateResponse(
+        request,
+        template,
+        {
+            "habits": habits,
+            "logs": logs,
+            "form": form,
+        },
+    )
 
 
 @login_required
@@ -58,20 +68,24 @@ def add_habit(request: HttpRequest) -> HttpResponse:
 
 
 @login_required
-def edit_habit(request: HttpRequest, id: int) -> HttpResponse:
-    pass
+def update_habit(request: HttpRequest, pk: int) -> HttpResponse:
+    template = "habits/partials/edit_habit.html"
+
+    return HttpResponse()
 
 
 @login_required
-def delete_habit(request: HttpRequest, id: int) -> HttpResponse:
-    pass
+def delete_habit(request: HttpRequest, pk: int) -> HttpResponse:
+    if request.method == "POST":
+        habit = get_object_or_404(Habit, pk=pk)
+        if habit and request.user.has_perm("habits.view_habit", habit):
+            habit.delete()
+        return redirect(reverse("habits:home"))
 
 
 @login_required
 def list_habit(request: HttpRequest) -> HttpResponse:
-    """
-    This function handle the request to list all habit.
-    """
+    pass
 
 
 @login_required
