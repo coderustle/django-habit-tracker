@@ -11,6 +11,7 @@ window.htmx = require("htmx.org");
  * Style
  */
 import "./css/main.css";
+import "boxicons";
 
 /**
  * Images

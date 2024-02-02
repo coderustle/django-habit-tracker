@@ -25,11 +25,12 @@ class HabitLog(models.Model):
     habit = models.ForeignKey(
         Habit, on_delete=models.CASCADE, related_name="logs"
     )
-    completed = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ["date", "habit"]
         indexes = [models.Index(fields=["-date"])]
+        default_permissions = ("add", "change", "delete")
+        permissions = (("view_habit_log", "View Habit Log Objects"),)
 
     def __str__(self) -> str:
         return f"{self.habit.title} on {self.date}"

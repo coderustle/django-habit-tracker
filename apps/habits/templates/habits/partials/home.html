@@ -1,29 +1,64 @@
-<div id="main-content" class="mt-6 h-full">
-
+{% load widget_tweaks %}
+<div id="main-content" class="my-6 h-full">
   {% if messages %}
     {% include "_messages.html" with messages=messages %}
   {% endif %}
-
   <div class="container h-3/4 max-w-2xl p-4">
-
     <div class="flex justify-between border-b py-4">
       <h1 class="text-3xl font-bold tracking-wider">Habits</h1>
-      <button
-        hx-get="{% url 'habits:add' %}"
-        hx-target="#add-habit"
-        class="rounded px-4 py-2 bg-secondary">Add habit</button>
+      <button hx-get="{% url 'habits:add' %}"
+              hx-target="#add-habit"
+              class="rounded px-4 py-2 bg-secondary">Add habit</button>
     </div>
-
     <div id="add-habit"></div>
-
     <div id="list-habits">
-      <form class="flex flex-col gap-2 text-lg mt-4">
+      <form class="flex flex-col gap-4 mt-4 mb-6">
         {% for habit in habits %}
-          <p contentEditable="true">{{ habit }}</p>
+          <div id="habit-content"
+               class="p-4 bg-white rounded-md text-lg flex justify-between items-center">
+            <div class="w-full flex flex-col justify-between">
+              <div class="text-lg flex gap-4">
+                <input type="text"
+                       name="habit"
+                       value="{{ habit }}"
+                       id="{{ habit.id }}"
+                       hx-post="{% url 'habits:update' pk=habit.id %}"
+                       hx-trigger="blur"
+                       class="w-full py-2 text-lg focus:outline-none">
+              </div>
+              <div class="text-gray-500 text-base flex gap-4">
+                <button hx-post="{% url 'habits:delete' pk=habit.id %}"
+                        hx-target="#main-content"
+                        class="hover:text-secondary">Delete</button>
+              </div>
+            </div>
+            <button class="flex items-center"
+                    hx-target="#main-content"
+                    hx-post="{% url 'habits:log' pk=habit.id %}">
+              <box-icon class="hover:scale-125 transition duration-500 ease-in-out cursor-pointer" name='check-circle' size="md" color="green"></box-icon>
+            </button>
+          </div>
         {% endfor %}
       </form>
     </div>
-
+    {% if logs %}
+      <div class="border-b my-4 py-4">
+        <h2 class="text-2xl text-gray-500 tracking-wider">Completed</h2>
+      </div>
+      <div class="space-y-4 mb-10">
+        {% for habit in logs %}
+          <div class="p-4 bg-white border border-green-300 rounded-md text-lg flex justify-between items-center">
+            <div class="line-through">
+              <span>{{ habit }}</span>
+            </div>
+            <button class="flex items-center"
+                    hx-target="#main-content"
+                    hx-post="{% url 'habits:delete-log' pk=habit.id %}">
+              <box-icon class="hover:scale-125 transition duration-500 ease-in-out cursor-pointer" name='x-circle' size="md" color="#F5604A"></box-icon>
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
-
 </div>

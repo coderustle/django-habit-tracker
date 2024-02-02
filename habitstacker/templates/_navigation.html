@@ -1,7 +1,5 @@
 <div id="navigation" class="flex items-center bg-gray-200 border-2">
-
   <div class="container flex flex-col md:flex-row-reverse md:justify-between p-4">
-
     <div class="flex items-center justify-between">
       <button @click.prevent="showMenu = !showMenu"
               class="flex items-center justify-center md:hidden">
@@ -12,7 +10,6 @@
           <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
         </svg>
       </button>
-
       <button hx-get="{% url "habits:home" %}"
               hx-push-url="true"
               hx-swap="innerHTML"
@@ -22,70 +19,74 @@
         <span class="font-bold">Stacker</span>
       </button>
     </div>
-
     <nav x-cloak
          x-transition
          @click.prevent="showMenu = !showMenu"
          :class="showMenu ? 'md:block relative w-full md:w-max bg-gray-200 p-4' : 'hidden md:block relative w-full md:w-max bg-gray-200 p-4'">
       <ul class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4 text-center md:text-left text-xl md:text-lg">
-
         {% if user.is_authenticated %}
-          <li
-            class="w-full justify-center md:justify-start text-secondary flex items-center gap-1 md:w-max p-2">
-            <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.271 18.3457C4.271 18.3457 6.50002 15.5 12 15.5C17.5 15.5 19.7291 18.3457 19.7291 18.3457" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 12C13.6569 12 15 10.6569 15 9C15 7.34315 13.6569 6 12 6C10.3431 6 9 7.34315 9 9C9 10.6569 10.3431 12 12 12Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <li class="w-full justify-center md:justify-start text-secondary flex items-center gap-1 md:w-max p-2">
+            <svg width="24px"
+                 height="24px"
+                 stroke-width="1.5"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 xmlns="http://www.w3.org/2000/svg"
+                 color="#000000">
+              <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M4.271 18.3457C4.271 18.3457 6.50002 15.5 12 15.5C17.5 15.5 19.7291 18.3457 19.7291 18.3457" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+              <path d="M12 12C13.6569 12 15 10.6569 15 9C15 7.34315 13.6569 6 12 6C10.3431 6 9 7.34315 9 9C9 10.6569 10.3431 12 12 12Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+            </svg>
             <span>{{ user }}</span>
           </li>
-          <li
-            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary">
+          <li class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary">
             <button hx-get="{% url 'habits:home' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Home
-            </button>
+                    class="cursor-pointer tracking-wider">Habits</button>
           </li>
-          <li
-            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+          <li class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary">
+            <button hx-get="{% url 'habits:home' %}"
+                    hx-swap="innerHTML"
+                    hx-target="#main-content"
+                    hx-push-url="true"
+                    class="cursor-pointer tracking-wider">Records</button>
+          </li>
+          <li class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:profile' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Profile
-            </button>
+                    class="cursor-pointer tracking-wider">Profile</button>
           </li>
-          <li
-            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+          <li class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:logout' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Logout
-            </button>
+                    class="cursor-pointer tracking-wider">Logout</button>
           </li>
         {% else %}
-          <li
-            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+          <li class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:login' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Login
-            </button>
+                    class="cursor-pointer tracking-wider">Login</button>
           </li>
-          <li
-            class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
+          <li class="w-full md:w-max border-b border-gray-300 p-2 transition-colors duration-500 hover:text-secondary md:max-w-sm">
             <button hx-get="{% url 'users:register' %}"
                     hx-swap="innerHTML"
                     hx-target="#main-content"
                     hx-push-url="true"
-                    class="cursor-pointer tracking-wider">Register
-            </button>
+                    class="cursor-pointer tracking-wider">Register</button>
           </li>
         {% endif %}
-
       </ul>
     </nav>
-
   </div>
-
 </div>
